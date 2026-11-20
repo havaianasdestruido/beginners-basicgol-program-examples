@@ -1,36 +1,41 @@
+#include <basicgol.h>
+
 // Insertion sort ascending order
 
-#include <stdio.h>
+INICIO
+    INTEIRO n, array[1000], c, d, t;
 
-int main()
-{
-  int n, array[1000], c, d, t;
+    ESCREVAL("Enter number of elements");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-  printf("Enter number of elements\n");
-  scanf("%d", &n);
+    AFIRME(n >= 0 E n <= 1000, "Expected 0..1000 elements");
+    ESCREVA_FMT("Enter %d integers\n", n);
 
-  printf("Enter %d integers\n", n);
-
-  for (c = 0; c < n; c++)
-    scanf("%d", &array[c]);
-
-  for (c = 1 ; c <= n - 1; c++) {
-    d = c;
-
-    while ( d > 0 && array[d-1] > array[d]) {
-      t          = array[d];
-      array[d]   = array[d-1];
-      array[d-1] = t;
-
-      d--;
+    PARA (c, 0, n - 1) {
+        SE NAO LEIA_OK(array[c]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
     }
-  }
 
-  printf("Sorted list in ascending order:\n");
+    PARA (c, 1, n - 1) {
+        d = c;
 
-  for (c = 0; c <= n - 1; c++) {
-    printf("%d\n", array[c]);
-  }
+        ENQUANTO d > 0 E array[d - 1] > array[d] FACA
+            t = array[d];
+            array[d] = array[d - 1];
+            array[d - 1] = t;
 
-  return 0;
-}
+            d--;
+        FIM_ENQUANTO
+    }
+
+    ESCREVAL("Sorted list in ascending order:");
+
+    PARA (c, 0, n - 1) {
+        ESCREVA_FMT("%d\n", array[c]);
+    }
+
+    RETORNE 0;
+FIM

@@ -1,40 +1,37 @@
-//C program to input a matrix of order MxN and find its transpose
+#include <basicgol.h>
 
-#include <stdio.h>
-#include<conio.h>
-int main()
-{
-    static int array[10][10];
-    int i, j, row, col;
+// C program to input a matrix of order MxN and find its transpose
 
-    printf("Enter the order of the matrix \n");
-    scanf("%d %d", &row, &col);
-    printf("Enter the coefficients of the matrix\n");
-    for (i = 0; i < row; ++i)
-    {
-        for (j = 0; j < col; ++j)
-        {
-            scanf("%d", &array[i][j]);
+INICIO
+    ESTATICO INTEIRO array[10][10];
+    INTEIRO i, j, row, col;
+
+    ESCREVAL("Enter the order of the matrix ");
+    SE NAO LEIA_OK(row) OU NAO LEIA_OK(col) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCREVAL("Enter the coefficients of the matrix");
+    PARA (i, 0, row - 1) {
+        PARA (j, 0, col - 1) {
+            SE NAO LEIA_OK(array[i][j]) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
         }
     }
-    printf("The given matrix is \n");
-    for (i = 0; i < row; ++i)
-    {
-        for (j = 0; j < col; ++j)
-        {
-            printf(" %d", array[i][j]);
+    ESCREVAL("The given matrix is ");
+    PARA (i, 0, row - 1) {
+        PARA (j, 0, col - 1) {
+            ESCREVA_FMT(" %d", array[i][j]);
         }
-        printf("\n");
+        ESCREVA_LINHA();
     }
-    printf("Transpose of matrix is \n");
-    for (j = 0; j < col; ++j)
-    {
-        for (i = 0; i < row; ++i)
-        {
-            printf(" %d", array[i][j]);
+    ESCREVAL("Transpose of matrix is ");
+    PARA (j, 0, col - 1) {
+        PARA (i, 0, row - 1) {
+            ESCREVA_FMT(" %d", array[i][j]);
         }
-        printf("\n");
+        ESCREVA_LINHA();
     }
 
-    return 0;
-}
+    RETORNE 0;
+FIM

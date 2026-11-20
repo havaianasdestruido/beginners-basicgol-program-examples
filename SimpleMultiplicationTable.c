@@ -1,16 +1,17 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-int main(){
+INICIO
+    INTEIRO num, i = 1;
 
-	int num, i = 1;
+    ESCREVAL("Enter a number to calculate the multiplication table up to 10:");
 
-    printf("Enter a number to calculate the multiplication table up to 10:\n");
+    SE NAO LEIA_OK(num) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-	scanf("%d", &num);
+    PARA (i, 1, 10) {
+        ESCREVA_FMT("%d x %d = %d\n", i, num, num * i);
+    }
 
-	for(i = 1; i <= 10; i++){
-		printf("%d x %d = %d\n", i, num, num * i);
-	}
-
-	return 0;
-}
+    RETORNE 0;
+FIM

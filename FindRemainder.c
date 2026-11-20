@@ -1,17 +1,17 @@
-#include<stdio.h>
-int main ()
-{
-  int t, A, B;
-  int rem = 0;
-  scanf ("%d", &t);
+#include <basicgol.h>
 
-  while (t--)
-    {
+INICIO
+    INTEIRO t, A, B;
+    INTEIRO rem = 0;
+    AFIRME(LEIA_OK(t), "Invalid input");
 
-      scanf ("%d%d",&A,&B);
-      rem = A % B;
-      printf("%d\n", rem);
-      }
+    ENQUANTO t-- FACA
 
-  return 0;
-}
+        AFIRME(LEIA_OK(A) E LEIA_OK(B), "Invalid input");
+        AFIRME(B != 0, "Division by zero");
+        rem = A MOD B;
+        ESCREVA_FMT("%d\n", rem);
+    FIM_ENQUANTO
+
+    RETORNE 0;
+FIM

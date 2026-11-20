@@ -1,15 +1,16 @@
+#include <basicgol.h>
+
 // Swap two integers without using third variable
 
-
-#include<stdio.h>
-int main()
-{
-    int a, b;
-    printf("Enter two no :\n");
-    scanf("%d%d",&a,&b);
-    a = a^b;
-    b = a^b;
-    a=  a^b;
-    printf("After swapping value of a and b : %d,%d",a,b);
-    return 0;
-}
+INICIO
+    INTEIRO a, b;
+    ESCREVAL("Enter two no :");
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(b) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    a = a ^ b;
+    b = a ^ b;
+    a = a ^ b;
+    ESCREVA_FMT("After swapping value of a and b : %d,%d", a, b);
+    RETORNE 0;
+FIM

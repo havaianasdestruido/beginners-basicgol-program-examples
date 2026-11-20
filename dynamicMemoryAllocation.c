@@ -1,11 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <basicgol.h>
 
 #define SIZE 0x100
-void main(){
-
-	char *ptr = malloc(SIZE);
-	snprintf(ptr , SIZE , "data : %s " , "hello world");
-	printf("%s",ptr);
-
-}
+INICIO
+    CARACTERE *ptr = malloc(SIZE);
+    AFIRME(ptr != NULL, "Allocation failed");
+    snprintf(ptr, SIZE, "data : %s ", "hello world");
+    ESCREVA_FMT("%s", ptr);
+    free(ptr);
+FIM

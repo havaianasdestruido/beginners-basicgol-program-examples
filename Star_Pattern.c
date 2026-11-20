@@ -1,17 +1,16 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-int main(){
+INICIO
+    INTEIRO n, i, j;
 
-    int n, i,j;
+    ESCREVA("Enter number of rows : ");
+    AFIRME(LEIA_OK(n), "Invalid input");
 
-    printf("Enter number of rows : ");
-    scanf("%d" , &n);
-
-    for(i=1;i<=n;i++){
-        for(j=1;j<=i;j++)
-            printf("* ");
-        printf("\n");
+    PARA (i, 1, n) {
+        PARA (j, 1, i) {
+            ESCREVA("* ");
+        }
+        ESCREVA_LINHA();
     }
-    return 0;
-}
-
+    RETORNE 0;
+FIM

@@ -1,30 +1,30 @@
-#include <stdio.h>
-int main()
-{
+#include <basicgol.h>
 
+INICIO
+    /* A no. is said to be palindrome if the number when reversed equals to the same no.  eg: 121 */
 
-	/* A no. is said to be palindrome if the number when reversed equals to the same no.  eg: 121*
-  
-    int n, reversedInteger = 0, remainder, originalInteger;
-    printf("Enter an integer: ");
-    scanf("%d", &n);
+    INTEIRO n, reversedInteger = 0, remainder, originalInteger;
+    ESCREVA("Enter an integer: ");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
     originalInteger = n;
 
     // reversed integer is stored in variable
- 
-    while( n!=0 )
-    {
-        remainder = n%10;
-        reversedInteger = reversedInteger*10 + remainder;
+
+    ENQUANTO n != 0 FACA
+        remainder = n MOD 10;
+        reversedInteger = reversedInteger * 10 + remainder;
         n /= 10;
-    }
+    FIM_ENQUANTO
 
     // palindrome if orignalInteger and reversedInteger are equal
 
-    if (originalInteger == reversedInteger)
-        printf("%d is a palindrome.", originalInteger);
-    else
-        printf("%d is not a palindrome.", originalInteger);
-    
-    return 0;
-}
+    SE originalInteger == reversedInteger ENTAO
+        ESCREVA_FMT("%d is a palindrome.", originalInteger);
+    SENAO
+        ESCREVA_FMT("%d is not a palindrome.", originalInteger);
+    FIM_SE
+
+    RETORNE 0;
+FIM

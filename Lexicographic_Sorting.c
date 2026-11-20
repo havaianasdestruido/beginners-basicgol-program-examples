@@ -1,38 +1,35 @@
-// Lexicographic sorting is the way of sorting words based on the alphabetical order of their component letters.
+#include <basicgol.h>
 
-#include <stdio.h>
-#include <string.h>
-void main()
-{
-    char str[20][20], temp[20];
-    int n, i, j;
-    printf("Enter the Number of Strings:\n");
-    scanf("%d", &n);
+// Lexicographic sorting is the way of sorting words based on the alphabetical order of their component
+// letters.
+
+INICIO
+    CARACTERE str[20][20], temp[20];
+    INTEIRO n, i, j;
+    ESCREVAL("Enter the Number of Strings:");
+    SE NAO LEIA_OK(n) OU n < 0 OU n > 20 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
     // Getting strings input
-    printf("Enter the Strings:\n");
-    for (i = 0; i < n; i++)
-    {
-        scanf("%s", str[i]);
+    ESCREVAL("Enter the Strings:");
+    PARA (i, 0, n - 1) {
+        AFIRME(scanf("%19s", str[i]) == 1, "Invalid input");
     }
 
     // storing strings in the lexicographical order
-    for (i = 0; i < n - 1; i++)
-    {
-        for (j = 0; j < n - 1 - i; j++)
-        {
-            if (strcmp(str[j], str[j + 1]) > 0)
-            {
+    PARA (i, 0, n - 2) {
+        PARA (j, 0, n - 1 - i - 1) {
+            SE COMPARA_TEXTO(str[j], str[j + 1]) > 0 ENTAO
                 // swapping strings if they are not in the lexicographical order
                 strcpy(temp, str[j]);
                 strcpy(str[j], str[j + 1]);
                 strcpy(str[j + 1], temp);
-            }
+            FIM_SE
         }
     }
-    printf("Strings in the Lexicographical Order is:\n");
-    for (i = 0; i < n; i++)
-    {
-        puts(str[i]);
+    ESCREVAL("Strings in the Lexicographical Order is:");
+    PARA (i, 0, n - 1) {
+        ESCREVAL(str[i]);
     }
-}
+FIM

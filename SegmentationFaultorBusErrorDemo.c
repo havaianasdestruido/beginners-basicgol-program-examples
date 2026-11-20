@@ -1,29 +1,15 @@
-// This program will show a segmentation or bus error because we tried to change string literals
-// A segmentation fault (aka segfault) is a common condition that causes programs to crash;
-// they are often associated with a file named core . Segfaults are caused by a program trying to
-// read or write an illegal memory location.
+#include <basicgol.h>
 
-#include <stdio.h>
-int
-main ()
-{
+// A string literal is not writable. Rotate the cards in a mutable array instead.
+INICIO
+    CARACTERE cards[] = "JQK";
 
-char *cards = "JQK";
+    CARACTERE first = cards[0];
+    cards[0] = cards[1];
+    cards[1] = cards[2];
+    cards[2] = first;
 
-char a_card = cards[2];
+    ESCREVAL(cards);
 
-cards[2] = cards[1];
-
-cards[1] = cards[0];
-
-cards[0] = cards[2];
-
-cards[2] = cards[1];
-
-cards[1] = a_card;
-
-puts (cards);
-
-return 0;
-
-}
+    RETORNE 0;
+FIM

@@ -1,28 +1,31 @@
+#include <basicgol.h>
+
 // Program to find employee grade
 // Given TA : 5% , DA : 7.5% , HRA : 10%
 
-#include<stdio.h>
-int main(){
-    float BaseSalary, TA, DA, HRA, GrossSalary;
+INICIO
+    REAL_CURTO BaseSalary, TA, DA, HRA, GrossSalary;
 
-    printf("Enter basic salary of employee\n");
-    scanf("%f", &BaseSalary);
+    ESCREVAL("Enter basic salary of employee");
+    SE NAO LEIA_OK(BaseSalary) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-    TA  = 0.05 * BaseSalary;
-    DA  = 0.075 * BaseSalary;
+    TA = 0.05 * BaseSalary;
+    DA = 0.075 * BaseSalary;
     HRA = 0.1 * BaseSalary;
     GrossSalary = BaseSalary + TA + DA + HRA;
 
-    if (GrossSalary >= 100000)
-        printf("A grade employee");
-    else if (GrossSalary >= 75000 && GrossSalary < 100000)
-        printf("B grade employee");
-    else if (GrossSalary >=50000 && GrossSalary < 75000)
-        printf("C grade employee");
-    else if (GrossSalary >= 20000 && GrossSalary < 50000)
-        printf("D grade employee");
-    else
-        printf("E grade employee");
-    return 0;
-}
-
+    SE GrossSalary >= 100000 ENTAO
+        ESCREVA("A grade employee");
+    SENAO_SE GrossSalary >= 75000 E GrossSalary < 100000 ENTAO
+        ESCREVA("B grade employee");
+    SENAO_SE GrossSalary >= 50000 E GrossSalary < 75000 ENTAO
+        ESCREVA("C grade employee");
+    SENAO_SE GrossSalary >= 20000 E GrossSalary < 50000 ENTAO
+        ESCREVA("D grade employee");
+    SENAO
+        ESCREVA("E grade employee");
+    FIM_SE
+    RETORNE 0;
+FIM

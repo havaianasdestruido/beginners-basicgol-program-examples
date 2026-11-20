@@ -1,61 +1,67 @@
+#include <basicgol.h>
+
 // Quick sort Algorithm
-#include <stdio.h>
 
-void quick_sort(int[], int, int);
-int partition(int[], int, int);
+PROCEDIMENTO quick_sort(INTEIRO[], INTEIRO, INTEIRO);
+FUNCAO INTEIRO partition(INTEIRO[], INTEIRO, INTEIRO);
 
-int main() {
-  int a[50], n, i;
-  printf("How many elements?");
-  scanf("%d", & n);
-  printf("\nEnter array elements:");
+INICIO
+    INTEIRO a[50], n, i;
+    ESCREVA("How many elements?");
+    SE NAO LEIA_OK(n) OU n < 0 OU n > 50 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCREVA("\nEnter array elements:");
 
-  for (i = 0; i < n; i++)
-    scanf("%d", & a[i]);
-
-  quick_sort(a, 0, n - 1);
-  printf("\nArray after sorting:");
-
-  for (i = 0; i < n; i++)
-    printf("%d ", a[i]);
-
-  return 0;
-}
-
-void quick_sort(int a[], int l, int u) {
-  int j;
-  if (l < u) {
-    j = partition(a, l, u);
-    quick_sort(a, l, j - 1);
-    quick_sort(a, j + 1, u);
-  }
-}
-
-int partition(int a[], int l, int u) {
-  int v, i, j, temp;
-  v = a[l];
-  i = l;
-  j = u + 1;
-
-  do {
-    do
-      i++;
-
-    while (a[i] < v && i <= u);
-
-    do
-      j--;
-    while (v < a[j]);
-
-    if (i < j) {
-      temp = a[i];
-      a[i] = a[j];
-      a[j] = temp;
+    PARA (i, 0, n - 1) {
+        SE NAO LEIA_OK(a[i]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
     }
-  } while (i < j);
 
-  a[l] = a[j];
-  a[j] = v;
+    quick_sort(a, 0, n - 1);
+    ESCREVA("\nArray after sorting:");
 
-  return (j);
+    PARA (i, 0, n - 1) {
+        ESCREVA_FMT("%d ", a[i]);
+    }
+
+    RETORNE 0;
+FIM
+
+PROCEDIMENTO quick_sort(INTEIRO a[], INTEIRO l, INTEIRO u) {
+    INTEIRO j;
+    SE l < u ENTAO
+        j = partition(a, l, u);
+        quick_sort(a, l, j - 1);
+        quick_sort(a, j + 1, u);
+    FIM_SE
+}
+
+FUNCAO INTEIRO partition(INTEIRO a[], INTEIRO l, INTEIRO u) {
+    INTEIRO v, i, j, temp;
+    v = a[l];
+    i = l;
+    j = u + 1;
+
+    REPITA
+        REPITA
+            i++;
+        ATE_QUE(i > u OU a[i] >= v);
+
+        REPITA
+            j--;
+        ATE_QUE(a[j] <= v);
+
+        SE i < j ENTAO
+            temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        FIM_SE
+    ATE_QUE(i >= j);
+
+    a[l] = a[j];
+    a[j] = v;
+
+    RETORNE (j);
 }

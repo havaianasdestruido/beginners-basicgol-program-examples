@@ -1,38 +1,41 @@
+#include <basicgol.h>
+
 // Program to input an integer number and check whether it is
-//even or odd and positive or negative using goto  statements
+// even or odd and positive or negative using goto  statements
 
-#include <stdio.h>
-  int main() {
+INICIO
+    INTEIRO n;
 
-    int n;
-
-    printf("enter a number\n");
-    scanf("%d", & n);
-    if (n % 2 == 0 && n > 0)
-      goto a;
-    else if (n % 2 != 0 && n < 0)
-      goto b;
-    else if (n % 2 == 0 && n < 0)
-      goto c;
-    else if (n % 2 != 0 && n > 0)
-      goto d;
-    else
-      goto e;
-    a:
-      printf("number is even and positive");
+    ESCREVAL("enter a number");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    SE n MOD 2 == 0 E n > 0 ENTAO
+        goto a;
+    SENAO_SE n MOD 2 != 0 E n < 0 ENTAO
+        goto b;
+    SENAO_SE n MOD 2 == 0 E n < 0 ENTAO
+        goto c;
+    SENAO_SE n MOD 2 != 0 E n > 0 ENTAO
+        goto d;
+    SENAO
+        goto e;
+    FIM_SE
+a:
+    ESCREVA("number is even and positive");
     goto stop;
-    b:
-      printf("number is odd and negative");
+b:
+    ESCREVA("number is odd and negative");
     goto stop;
-    c:
-      printf("number is even and negative");
+c:
+    ESCREVA("number is even and negative");
     goto stop;
-    d:
-      printf("number is odd and positive");
+d:
+    ESCREVA("number is odd and positive");
     goto stop;
-    e:
-      printf("special number");
+e:
+    ESCREVA("special number");
     goto stop;
-    stop:
-      return 0;
-  }
+stop:
+    RETORNE 0;
+FIM

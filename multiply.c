@@ -1,8 +1,11 @@
-#include<stdio.h>
-void main()
-{ int a,b;
-printf("Enter two Numbers : ");
-scanf("%d %d",&a,&b);
-c=a*b;
-printf("The Multiplication is %d",c);
-}
+#include <basicgol.h>
+
+INICIO
+    INTEIRO a, b, c;
+    ESCREVA("Enter two Numbers : ");
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(b) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    c = a * b;
+    ESCREVA_FMT("The Multiplication is %d", c);
+FIM

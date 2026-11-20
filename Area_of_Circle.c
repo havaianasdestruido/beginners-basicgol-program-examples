@@ -1,8 +1,11 @@
-#include<stdio.h>
-void main()
-{ float a,r;
-printf("Enter the Radius : ");
-scanf("%f",&r);
-a=3.14*r*r;
-printf("Area is %f",a);
-}
+#include <basicgol.h>
+
+INICIO
+    REAL_CURTO a, r;
+    ESCREVA("Enter the Radius : ");
+    SE NAO LEIA_OK(r) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    a = 3.14 * r * r;
+    ESCREVA_FMT("Area is %f", a);
+FIM

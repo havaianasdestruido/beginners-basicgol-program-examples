@@ -1,37 +1,38 @@
+#include <basicgol.h>
+
 // A basic implementation of a linear congruential pseudorandom number generator in C
 
-#include <stdio.h>
 #include <time.h>
-#include <math.h>
 
-struct lcg_rand {
-  unsigned int modulus;
-  unsigned int multiplier;
-  unsigned int increment;
-  unsigned int seed;
-  unsigned int last;
-};
+REGISTRO(lcg_rand)
+    NATURAL modulus;
+    NATURAL multiplier;
+    NATURAL increment;
+    NATURAL seed;
+    NATURAL last;
+FIM_REGISTRO(lcg_rand);
 
-struct lcg_rand new_generator(unsigned int modulus, unsigned int multiplier, unsigned int increment) {
-  struct lcg_rand random;
-  random.modulus = modulus;
-  random.multiplier = multiplier;
-  random.increment = increment;
-  random.seed = time(NULL);
-  random.last = random.seed;
-  return random;
+FUNCAO lcg_rand new_generator(NATURAL modulus, NATURAL multiplier, NATURAL increment) {
+    lcg_rand random;
+    random.modulus = modulus;
+    random.multiplier = multiplier;
+    random.increment = increment;
+    random.seed = time(NULL);
+    random.last = random.seed;
+    RETORNE random;
 }
 
-int random(struct lcg_rand * random) {
-  int number = ((random->multiplier * random->last) + random->increment) % random->modulus;
-  random->last = number;
-  return number;
+FUNCAO INTEIRO random(lcg_rand *random) {
+    INTEIRO number = ((random->multiplier * random->last) + random->increment) MOD random->modulus;
+    random->last = number;
+    RETORNE number;
 }
 
-int main() {
-  struct lcg_rand rng = new_generator(pow(2, 31), 1103515245, 12345);
-  for (int i = 0; i < 10; i++) {
-    printf("%d\n", random( & rng));
-  }
-  return 0;
-}
+INICIO
+    lcg_rand rng = new_generator(POTENCIA(2, 31), 1103515245, 12345);
+    INTEIRO i;
+    PARA (i, 0, 9) {
+        ESCREVA_FMT("%d\n", random(&rng));
+    }
+    RETORNE 0;
+FIM

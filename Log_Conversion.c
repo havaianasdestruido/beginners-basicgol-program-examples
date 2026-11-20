@@ -1,17 +1,18 @@
-#include <stdio.h>
-#include <math.h>
+#include <basicgol.h>
 
-int main(int argc, const char * argv[], value)
-{
+INICIO
     /* Define temporary variables */
-    double value;
-    double result;
+    REAL value;
+    REAL result;
 
     /* Calculate the log of the value */
+    SE NAO LEIA_OK(value) OU value <= 0 ENTAO
+        RETORNE 1;
+    FIM_SE
     result = log(value);
 
     /* Display the result of the calculation */
-    printf("The Natural Logarithm of %f is %f\n", value, result);
+    ESCREVA_FMT("The Natural Logarithm of %f is %f\n", value, result);
 
-    return 0;
-}
+    RETORNE 0;
+FIM

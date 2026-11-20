@@ -1,66 +1,68 @@
+#include <basicgol.h>
 
-#include<stdio.h>
- 
-void create(int []);
-void down_adjust(int [],int);
- 
-void main()
-{
-	int heap[30],n,i,last,temp;
-	printf("Enter no. of elements:");
-	scanf("%d",&n);
-	printf("\nEnter elements:");
-	for(i=1;i<=n;i++)
-		scanf("%d",&heap[i]);
-	
-	//create a heap
-	heap[0]=n;
-	create(heap);
-	
-	//sorting
-	while(heap[0] > 1)
-	{
-		//swap heap[1] and heap[last]
-		last=heap[0];
-		temp=heap[1];
-		heap[1]=heap[last];
-		heap[last]=temp;
-		heap[0]--;
-		down_adjust(heap,1);
-	}
- 
-	//print sorted data
-	printf("\nArray after sorting:\n");
-	for(i=1;i<=n;i++)
-		printf("%d ",heap[i]);
+PROCEDIMENTO create(INTEIRO[]);
+PROCEDIMENTO down_adjust(INTEIRO[], INTEIRO);
+
+INICIO
+    INTEIRO heap[30], n, i, last, temp;
+    ESCREVA("Enter no. of elements:");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    AFIRME(n >= 0 E n <= 29, "Expected 0..29 elements");
+    ESCREVA("\nEnter elements:");
+    PARA (i, 1, n) {
+        SE NAO LEIA_OK(heap[i]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+    }
+
+    // create a heap
+    heap[0] = n;
+    create(heap);
+
+    // sorting
+    ENQUANTO heap[0] > 1 FACA
+        // swap heap[1] and heap[last]
+        last = heap[0];
+        temp = heap[1];
+        heap[1] = heap[last];
+        heap[last] = temp;
+        heap[0]--;
+        down_adjust(heap, 1);
+    FIM_ENQUANTO
+
+    // print sorted data
+    ESCREVAL("\nArray after sorting:");
+    PARA (i, 1, n) {
+        ESCREVA_FMT("%d ", heap[i]);
+    }
+FIM
+
+PROCEDIMENTO create(INTEIRO heap[]) {
+    INTEIRO i, n;
+    n = heap[0]; // no. of elements
+    PARA_PASSO (i, n / 2, 1, -1) {
+        down_adjust(heap, i);
+    }
 }
- 
-void create(int heap[])
-{
-	int i,n;
-	n=heap[0]; //no. of elements
-	for(i=n/2;i>=1;i--)
-		down_adjust(heap,i);
-}
- 
-void down_adjust(int heap[],int i)
-{
-	int j,temp,n,flag=1;
-	n=heap[0];
-	
-	while(2*i<=n && flag==1)
-	{
-		j=2*i;	//j points to left child
-		if(j+1<=n && heap[j+1] > heap[j])
-			j=j+1;
-		if(heap[i] > heap[j])
-			flag=0;
-		else
-		{
-			temp=heap[i];
-			heap[i]=heap[j];
-			heap[j]=temp;
-			i=j;
-		}
-	}
+
+PROCEDIMENTO down_adjust(INTEIRO heap[], INTEIRO i) {
+    INTEIRO j, temp, n, flag = 1;
+    n = heap[0];
+
+    ENQUANTO 2 * i <= n E flag == 1 FACA
+        j = 2 * i; // j points to left child
+        SE j + 1 <= n E heap[j + 1] > heap[j] ENTAO
+            j = j + 1;
+        FIM_SE
+        SE heap[i] > heap[j] ENTAO
+            flag = 0;
+        SENAO
+            temp = heap[i];
+            heap[i] = heap[j];
+            heap[j] = temp;
+            i = j;
+        FIM_SE
+    FIM_ENQUANTO
 }

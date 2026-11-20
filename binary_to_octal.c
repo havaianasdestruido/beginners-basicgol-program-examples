@@ -1,35 +1,37 @@
-#include <math.h>
-#include <stdio.h>
+#include <basicgol.h>
+#include <inttypes.h>
 
-int convert_to_octal(long long binary);
+FUNCAO INTEIRO convert_to_octal(INTEIRO64 binary);
 
-int main() {
-    long long binary;
-    printf("Enter a binary number: ");
-    scanf("%lld", &binary);
-    printf("%lld in binary = %d in octal", binary, convert(binary));
-    return 0;
-}
+INICIO
+    INTEIRO64 binary;
+    ESCREVA("Enter a binary number: ");
+    SE NAO LEIA_OK(binary) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCREVA_FMT("%" PRId64 " in binary = %d in octal", binary, convert_to_octal(binary));
+    RETORNE 0;
+FIM
 
-int convert_to_octal(long long binary) {
-    int octal = 0, decimal = 0, i = 0;
-    
-    //Step 1> convert binary to decimal
-    //Step 2> convert decimal to octal
-    
+FUNCAO INTEIRO convert_to_octal(INTEIRO64 binary) {
+    INTEIRO octal = 0, decimal = 0, i = 0;
+
+    // Step 1> convert binary to decimal
+    // Step 2> convert decimal to octal
+
     // converting binary to decimal
-    while (binary != 0) {
-        decimal += (binary % 10) * pow(2, i);
+    ENQUANTO binary != 0 FACA
+        decimal += (binary MOD 10) * POTENCIA(2, i);
         ++i;
         binary /= 10;
-    }
+    FIM_ENQUANTO
     i = 1;
 
     // converting to decimal to octal
-    while (decimal != 0) {
-        octal += (decimal % 8) * i;
+    ENQUANTO decimal != 0 FACA
+        octal += (decimal MOD 8) * i;
         decimal /= 8;
         i *= 10;
-    }
-    return octal;
+    FIM_ENQUANTO
+    RETORNE octal;
 }

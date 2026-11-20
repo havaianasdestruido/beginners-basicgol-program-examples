@@ -1,25 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <basicgol.h>
 
-int main() {
-    int r = 3, c = 4, i, j, count;
+INICIO
+    INTEIRO r = 3, c = 4, i, j, count;
 
-    int * arr[r];
-    for (i = 0; i < r; i++)
-        arr[i] = (int * ) malloc(c * sizeof(int));
+    INTEIRO *arr[r];
+    PARA (i, 0, r - 1) {
+        arr[i] = (INTEIRO *)malloc(c * TAMANHO_DE(INTEIRO));
+    }
 
-    // Note that arr[i][j] is same as *(*(arr+i)+j) 
+    // Note that arr[i][j] is same as *(*(arr+i)+j)
     count = 0;
-    for (i = 0; i < r; i++)
-        for (j = 0; j < c; j++)
-            arr[i][j] = ++count; // Or *(*(arr+i)+j) = ++count 
+    PARA (i, 0, r - 1) {
+        PARA (j, 0, c - 1) {
+            arr[i][j] = ++count; // Or *(*(arr+i)+j) = ++count
+        }
+    }
 
-    for (i = 0; i < r; i++)
-        for (j = 0; j < c; j++)
-            printf("%d ", arr[i][j]);
+    PARA (i, 0, r - 1) {
+        PARA (j, 0, c - 1) {
+            ESCREVA_FMT("%d ", arr[i][j]);
+        }
+    }
 
-    /* Code for further processing and free the  
-        dynamically allocated memory */
+    PARA (i, 0, r - 1) {
+        free(arr[i]);
+    }
 
-    return 0;
-}
+    RETORNE 0;
+FIM

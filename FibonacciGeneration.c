@@ -1,23 +1,22 @@
-// Fibonacci Series using Recursion 
-#include <stdio.h> 
+#include <basicgol.h>
+
+// Fibonacci Series using Recursion
 
 // fib function with argument n to generate nth Fibanocci Number
-int fib(int n) 
-{ 
-	// Base case defined
-    if (n <= 1){ 
-        return n; 
-    }
+FUNCAO INTEIRO fib(INTEIRO n) {
+    // Base case defined
+    SE n <= 1 ENTAO
+        RETORNE n;
+    FIM_SE
 
     // Recursive Calls to fib function
-    return fib(n - 1) + fib(n - 2); 
-} 
-  
-int main() 
-{ 
-	// Sample input
-    int n = 11; 
+    RETORNE fib(n - 1) + fib(n - 2);
+}
+
+INICIO
+    // Sample input
+    INTEIRO n = 11;
 
     // Printing the nth Fibanocci Number
-    printf("%d", fib(n));
-} 
+    ESCREVA_FMT("%d", fib(n));
+FIM

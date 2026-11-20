@@ -1,38 +1,42 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-int main()
-{
-	// The resultant temperatures can be in decimals as well, so we use double
-	double c, f, result;
-	// We use an integer type data to run the switch statement
-	int choice;
-	printf("Select your choice: \n");
-	printf("1. Celcius to Fahrenheit\n");
-	printf("2. Fahrenheit to Celcius\n");
-	
-	printf("Enter your choice: ");
-	scanf("%d", &choice);
+INICIO
+    // The resultant temperatures can be in decimals as well, so we use double
+    REAL c, f, result;
+    // We use an integer type data to run the switch statement
+    INTEIRO choice;
+    ESCREVAL("Select your choice: ");
+    ESCREVAL("1. Celcius to Fahrenheit");
+    ESCREVAL("2. Fahrenheit to Celcius");
 
-	// We compute the temperatures for both the cases here respectively
-	switch(choice)
-	{
-		case 1:
-			printf("Enter the temperature in Celcius: ");
-			scanf("%lf", &c);
-			result = (9 / 5) * c + 32;
-			break;
-		case 2:
-			printf("Enter the temperature in Fahrenheit: ");
-			scanf("%lf", &f);
-			result = (5 / 9) * (f - 32);
-			break;
+    ESCREVA("Enter your choice: ");
+    SE NAO LEIA_OK(choice) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-		// This case gets activated when the user inputs anything othrer than 1 or 2
-		default: 
-			printf("Invalid case!\n");
-	}
+    // We compute the temperatures for both the cases here respectively
+    ESCOLHA(choice)
+    CASO 1:
+        ESCREVA("Enter the temperature in Celcius: ");
+        SE NAO LEIA_OK(c) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+        result = (9.0 / 5) * c + 32;
+        PARE;
+    CASO 2:
+        ESCREVA("Enter the temperature in Fahrenheit: ");
+        SE NAO LEIA_OK(f) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+        result = (5.0 / 9) * (f - 32);
+        PARE;
 
-	// Printing out the result according to the computation
-	printf("The resultant temperature is: %lf", result);
-	return 0;
-}
+    // This case gets activated when the user inputs anything othrer than 1 or 2
+    CONTRARIO:
+        ERRO("Invalid case!");
+    FIM_ESCOLHA
+
+    // Printing out the result according to the computation
+    ESCREVA_FMT("The resultant temperature is: %lf", result);
+    RETORNE 0;
+FIM

@@ -1,54 +1,53 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <basicgol.h>
+#include <inttypes.h>
 
-long long* count_sort_naive(long long *arr, long n, long m)
-{
-	long long *count_arr = malloc((m + 1) * sizeof(long long));
-	long long *sorted_arr = malloc(n * sizeof(long long));
-
-	long i_arr = 0;
-	for (long i = 0; i <= m; ++i) {
-		/* compute the frequency of the ith element */
-		for (long j = 0; j < n; ++j) {
-			if (arr[j] == i) {
-				count_arr[i] += 1;
-			}
-		}
-
-		/* place the ith element count number of times */
-		for (long j = 0; j < count_arr[i]; ++j) {
-			sorted_arr[i_arr] = i;
-			i_arr += 1;
-		}
-	}
-	free(arr);
-
-	return sorted_arr;
+// Count each input once, then write that many copies of each value back to the array.
+PROCEDIMENTO countingSort(INTEIRO64 arr[], INTEIRO_LONGO n, INTEIRO_LONGO m) {
+    INTEIRO_LONGO *counts = calloc(m + 1, TAMANHO_DE(INTEIRO_LONGO));
+    AFIRME(counts != NULL, "Allocation failed");
+    INTEIRO_LONGO i, value, copy, next = 0;
+    PARA (i, 0, n - 1) {
+        counts[arr[i]]++;
+    }
+    PARA (value, 0, m) {
+        PARA (copy, 1, counts[value]) {
+            arr[next++] = value;
+        }
+    }
+    free(counts);
 }
 
-int main()
-{
-	/* Enter the size of the array */
-	long n = 0;
-	printf("Enter the number of elements to be sorted: ");
-	scanf("%ld", &n);
+INICIO
+    /* Enter the size of the array */
+    INTEIRO_LONGO n = 0;
+    ESCREVA("Enter the number of elements to be sorted: ");
+    SE NAO LEIA_OK(n) OU n < 1 OU n > 1000000 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-	/* Enter the range of the array [0 .. m] */
-	long m = 0;
-	printf("Enter the maximum value of the numbers to be sorted: ");
-	scanf("%ld", &m);
+    /* Enter the range of the array [0 .. m] */
+    INTEIRO_LONGO m = 0;
+    ESCREVA("Enter the maximum value of the numbers to be sorted: ");
+    SE NAO LEIA_OK(m) OU m < 0 OU m > 1000000 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-	/* Enter the values of the array */
-	printf("Enter the values to be sorted: ");
-	long long *arr = malloc(n * sizeof(long long));
-	for (long i = 0; i < n; ++i) {
-		scanf("%lld", &arr[i]);
-	}
+    /* Enter the values of the array */
+    ESCREVA("Enter the values to be sorted: ");
+    INTEIRO64 *arr = malloc(n * TAMANHO_DE(INTEIRO64));
+    AFIRME(arr != NULL, "Allocation failed");
+    INTEIRO_LONGO i;
+    PARA (i, 0, n - 1) {
+        SE NAO LEIA_OK(arr[i]) OU arr[i] < 0 OU arr[i] > m ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+    }
 
-	arr = count_sort_naive(arr, n, m);
+    countingSort(arr, n, m);
 
-	printf("After sorting\n");
-	for (long i = 0; i < n; ++i) {
-		printf("%lld ", arr[i]);
-	}
-}
+    ESCREVAL("After sorting");
+    PARA (i, 0, n - 1) {
+        ESCREVA_FMT("%" PRId64 " ", arr[i]);
+    }
+    free(arr);
+FIM

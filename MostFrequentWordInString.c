@@ -1,65 +1,57 @@
-#include <iostream>
-#include <string>
+#include <basicgol.h>
 
-using namespace std;
+INICIO
+    ESCREVAL("Value of inputs in your array?");
+    INTEIRO arraysize;
+    SE NAO LEIA_OK(arraysize) OU arraysize < 1 OU arraysize > 1000 ENTAO
+        RETORNE 1;
+    FIM_SE
 
-int main()
-{
-    cout << "Value of inputs in your array?" << endl;
-    int arraysize;
-    cin >> arraysize;
-    
-    cout << "Input array elements:" << endl;
-    
-    string array[arraysize];
-    
-    for(int i=0; i<arraysize; i++)
-    {
-        cin >> array[i];
+    ESCREVAL("Input array elements:");
+
+    CARACTERE array[arraysize][100];
+
+    INTEIRO i, j;
+    PARA (i, 0, arraysize - 1) {
+        SE scanf("%99s", array[i]) != 1 ENTAO
+            RETORNE 1;
+        FIM_SE
     }
-    
-    int most_occur = 1; 
-    
-    for(int i=0; i<arraysize-1; i++)
-    {
-        int times_occur = 1;
-        
-        for(int j=i+1; j<arraysize; j++)
-        {
-            if(array[i]==array[j])
-            times_occur = times_occur + 1;
-        }
-            
-        if(times_occur>most_occur)
-        {
-            most_occur = times_occur;
-        }
-        
-    }
-    
-    if(most_occur>1)
-    {
-        cout << "Most occuring: ";
-        for(int i=0; i<arraysize-1; i++)
-        {
-            int times_occur = 1;
-        
-            for(int j=i+1; j<arraysize; j++)
-            {
-                if(array[i]==array[j])
+
+    INTEIRO most_occur = 1;
+
+    PARA (i, 0, arraysize - 2) {
+        INTEIRO times_occur = 1;
+
+        PARA (j, i + 1, arraysize - 1) {
+            SE TEXTOS_IGUAIS(array[i], array[j]) ENTAO
                 times_occur = times_occur + 1;
-            }
-            
-            if(times_occur==most_occur)
-            {
-                cout << array[i] << " ";
-            }
+            FIM_SE
         }
+
+        SE times_occur > most_occur ENTAO
+            most_occur = times_occur;
+        FIM_SE
     }
-    
-    else
-    {
-        cout << "No specific array elements are repeating.";
-    }
-    
-    return 0;
+
+    SE most_occur > 1 ENTAO
+        ESCREVA("Most occuring: ");
+        PARA (i, 0, arraysize - 2) {
+            INTEIRO times_occur = 1;
+
+            PARA (j, i + 1, arraysize - 1) {
+                SE TEXTOS_IGUAIS(array[i], array[j]) ENTAO
+                    times_occur = times_occur + 1;
+                FIM_SE
+            }
+
+            SE times_occur == most_occur ENTAO
+                ESCREVA_FMT("%s ", array[i]);
+            FIM_SE
+        }
+    SENAO
+        ESCREVA("No specific array elements are repeating.");
+    FIM_SE
+
+    RETORNE 0;
+FIM

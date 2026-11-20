@@ -1,23 +1,27 @@
+#include <basicgol.h>
+
 // Sum of natural numbers using recursion
 
-#include <stdio.h>
-int sum(int n);
+FUNCAO INTEIRO sum(INTEIRO n);
 
-int main() {
-  int number, result;
+INICIO
+    INTEIRO number, result;
 
-  printf("Enter a positive integer: ");
-  scanf("%d", & number);
+    ESCREVA("Enter a positive integer: ");
+    SE NAO LEIA_OK(number) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-  result = sum(number);
+    result = sum(number);
 
-  printf("sum = %d", result);
-  return 0;
-}
+    ESCREVA_FMT("sum = %d", result);
+    RETORNE 0;
+FIM
 
-int sum(int num) {
-  if (num != 0)
-    return num + sum(num - 1); // sum() function calls itself
-  else
-    return num;
+FUNCAO INTEIRO sum(INTEIRO num) {
+    SE num != 0 ENTAO
+        RETORNE num + sum(num - 1); // sum() function calls itself
+    SENAO
+        RETORNE num;
+    FIM_SE
 }

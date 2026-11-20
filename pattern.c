@@ -1,26 +1,29 @@
-#include <stdio.h>
- 
-int main()
-{
-  int row, c, n, s;
- 
-  printf("Enter the number of rows in pyramid of stars you wish to see\n");
-  scanf("%d", &n);
- 
-  s = n;
- 
-  for (row = 1; row <= n; row++)  // Loop to print rows
-  {
-    for (c = 1; c < s; c++)  // Loop to print spaces in a row
-      printf(" ");
- 
-    s--;
- 
-    for (c = 1; c <= 2*row - 1; c++) // Loop to print stars in a row
-      printf("*");
- 
-    printf("\n");
-  }
- 
-  return 0;
-}
+#include <basicgol.h>
+
+INICIO
+    INTEIRO row, c, n, s;
+
+    ESCREVAL("Enter the number of rows in pyramid of stars you wish to see");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+
+    s = n;
+
+    PARA (row, 1, n) // Loop to print rows
+    {
+        PARA (c, 1, s - 1) { // Loop to print spaces in a row
+            ESCREVA(" ");
+        }
+
+        s--;
+
+        PARA (c, 1, 2 * row - 1) { // Loop to print stars in a row
+            ESCREVA("*");
+        }
+
+        ESCREVA_LINHA();
+    }
+
+    RETORNE 0;
+FIM

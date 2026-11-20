@@ -1,75 +1,67 @@
-#include <stdio.h>
+#include <basicgol.h>
+
 #define MAX 5
 
-int main()
-	{
-	int i,j = 0,num[MAX];
-	printf("Enter numbers in the range of 1 to 9 \n");
-	for(i = 0; i<MAX; )
-		{
-		scanf("%d",&num[i]);
-		switch (num[i])
-			{
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 9: i++;
-			break;
-			default:
-			    {
-                 j = 1;
-                 break;
-			    }
-
-
-			}
-		if(j == 1)
-        {
-            printf("NO MORE INPUT");
-            break;
+PROCEDIMENTO printEven(INTEIRO[MAX], INTEIRO);
+PROCEDIMENTO printMultiple(INTEIRO[MAX], INTEIRO);
+INICIO
+    INTEIRO i, j = 0, num[MAX];
+    ESCREVAL("Enter numbers in the range of 1 to 9 ");
+    i = 0;
+    ENQUANTO i < MAX FACA
+        SE NAO LEIA_OK(num[i]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+        ESCOLHA(num[i])
+        CASO 1:
+        CASO 2:
+        CASO 3:
+        CASO 4:
+        CASO 5:
+        CASO 6:
+        CASO 7:
+        CASO 8:
+        CASO 9:
+            i++;
+            PARE;
+        CONTRARIO: {
+            j = 1;
+            PARE;
         }
+        FIM_ESCOLHA
+        SE j == 1 ENTAO
+            ESCREVA("NO MORE INPUT");
+            PARE;
+        FIM_SE
+    FIM_ENQUANTO
+    ESCREVAL("Multiple of 3's \n");
+    printMultiple(num, i);
 
+    ESCREVAL("\n\n");
+    ESCREVAL("EVEN numbers\n\n");
+    printEven(num, i);
+FIM
 
-		}
-		printf("Multiple of 3's \n\n");
-		printMultiple(num, i);
+PROCEDIMENTO printMultiple(INTEIRO num[MAX], INTEIRO len) {
 
-		printf("\n\n\n");
-		printf("EVEN numbers\n\n\n");
-		printEven(num, i);
-	}
+    INTEIRO i;
+    PARA (i, 0, len - 1) {
+        INTEIRO ans3 = num[i] MOD 3;
+        ESCOLHA(ans3)
+        CASO 0:
+            ESCREVA_FMT("%d \n", num[i]);
+        FIM_ESCOLHA
+    }
+}
 
-	printMultiple(int num[MAX], int len)
-	{
+PROCEDIMENTO printEven(INTEIRO num[MAX], INTEIRO len) {
 
-		int i,j,k;
-		for(i = 0; i<len; i++)
-			{
-            int ans3 = num[i]%3;
-            switch (ans3)
-			{
-            case 0:
-                printf("%d \n", num[i]);
-			}
-			}
-	}
-
-	printEven(int num[MAX], int len)
-	{
-
-		int i,j,k;
-		for(i = 0; i<len; i++)
-			{
-            int ans_even = num[i]%2;
-            switch (ans_even)
-			{
-            case 0:
-                printf("%d \n", num[i]);
-			}
-			}
-	}
+    INTEIRO i;
+    PARA (i, 0, len - 1) {
+        INTEIRO ans_even = num[i] MOD 2;
+        ESCOLHA(ans_even)
+        CASO 0:
+            ESCREVA_FMT("%d \n", num[i]);
+        FIM_ESCOLHA
+    }
+}

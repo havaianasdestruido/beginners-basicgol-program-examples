@@ -1,8 +1,11 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-int main(int argc, char **argv, char **environ){
-	int i = -1;
+EXTERNO CARACTERE **environ;
 
-	while (environ[++i])
-		printf("%s\n",environ[i]);
-}
+INICIO
+    INTEIRO i = -1;
+
+    ENQUANTO environ[++i] FACA
+        ESCREVA_FMT("%s\n", environ[i]);
+    FIM_ENQUANTO
+FIM

@@ -1,19 +1,22 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-int factorial(int num) {
-  if (num == 1)
-    return 1;
-  else
-    return num * factorial(num - 1);
+FUNCAO INTEIRO factorial(INTEIRO num) {
+    SE num <= 1 ENTAO
+        RETORNE 1;
+    SENAO
+        RETORNE num * factorial(num - 1);
+    FIM_SE
 }
 
-int main() {
-  int number;
+INICIO
+    INTEIRO number;
 
-  printf("Type a positive number: ");
-  scanf("%d", & number);
+    ESCREVA("Type a positive number: ");
+    SE NAO LEIA_OK(number) OU number < 0 OU number > 12 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-  printf("%d! is equal to %d", number, factorial(number));
+    ESCREVA_FMT("%d! is equal to %d", number, factorial(number));
 
-  return 0;
-}
+    RETORNE 0;
+FIM

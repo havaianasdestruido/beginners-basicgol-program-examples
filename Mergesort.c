@@ -1,60 +1,70 @@
+#include <basicgol.h>
+
 // Merge sort Algorithm
-#include <stdio.h>
 
-void mergesort(int a[], int i, int j);
-void merge(int a[], int i1, int j1, int i2, int j2);
+PROCEDIMENTO mergesort(INTEIRO a[], INTEIRO i, INTEIRO j);
+PROCEDIMENTO merge(INTEIRO a[], INTEIRO i1, INTEIRO j1, INTEIRO i2, INTEIRO j2);
 
-int main() {
-  int a[30], n, i;
-  printf("Enter no of elements:");
-  scanf("%d", & n);
-  printf("Enter array elements:");
+INICIO
+    INTEIRO a[30], n, i;
+    ESCREVA("Enter no of elements:");
+    SE NAO LEIA_OK(n) OU n < 0 OU n > 30 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCREVA("Enter array elements:");
 
-  for (i = 0; i < n; i++)
-    scanf("%d", & a[i]);
+    PARA (i, 0, n - 1) {
+        SE NAO LEIA_OK(a[i]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+    }
 
-  mergesort(a, 0, n - 1);
+    mergesort(a, 0, n - 1);
 
-  printf("\nSorted array is :");
-  for (i = 0; i < n; i++)
-    printf("%d ", a[i]);
+    ESCREVA("\nSorted array is :");
+    PARA (i, 0, n - 1) {
+        ESCREVA_FMT("%d ", a[i]);
+    }
 
-  return 0;
+    RETORNE 0;
+FIM
+
+PROCEDIMENTO mergesort(INTEIRO a[], INTEIRO i, INTEIRO j) {
+    INTEIRO mid;
+
+    SE i < j ENTAO
+        mid = (i + j) / 2;
+        mergesort(a, i, mid);         // left recursion
+        mergesort(a, mid + 1, j);     // right recursion
+        merge(a, i, mid, mid + 1, j); // merging of two sorted sub-arrays
+    FIM_SE
 }
 
-void mergesort(int a[], int i, int j) {
-  int mid;
+PROCEDIMENTO merge(INTEIRO a[], INTEIRO i1, INTEIRO j1, INTEIRO i2, INTEIRO j2) {
+    VETOR(INTEIRO, temp, 50); // array used for merging
+    INTEIRO i, j, k;
+    i = i1; // beginning of the first list
+    j = i2; // beginning of the second list
+    k = 0;
 
-  if (i < j) {
-    mid = (i + j) / 2;
-    mergesort(a, i, mid); //left recursion
-    mergesort(a, mid + 1, j); //right recursion
-    merge(a, i, mid, mid + 1, j); //merging of two sorted sub-arrays
-  }
-}
+    ENQUANTO i <= j1 E j <= j2 FACA // while elements in both lists
+        SE a[i] < a[j] ENTAO
+            temp[k++] = a[i++];
+        SENAO
+            temp[k++] = a[j++];
+        FIM_SE
+    FIM_ENQUANTO
 
-void merge(int a[], int i1, int j1, int i2, int j2) {
-  int temp[50]; //array used for merging
-  int i, j, k;
-  i = i1; //beginning of the first list
-  j = i2; //beginning of the second list
-  k = 0;
+    ENQUANTO i <= j1 FACA // copy remaining elements of the first list
+        temp[k++] = a[i++];
+    FIM_ENQUANTO
 
-  while (i <= j1 && j <= j2) //while elements in both lists
-  {
-    if (a[i] < a[j])
-      temp[k++] = a[i++];
-    else
-      temp[k++] = a[j++];
-  }
+    ENQUANTO j <= j2 FACA // copy remaining elements of the second list
+        temp[k++] = a[j++];
+    FIM_ENQUANTO
 
-  while (i <= j1) //copy remaining elements of the first list
-    temp[k++] = a[i++];
-
-  while (j <= j2) //copy remaining elements of the second list
-    temp[k++] = a[j++];
-
-  //Transfer elements from temp[] back to a[]
-  for (i = i1, j = 0; i <= j2; i++, j++)
-    a[i] = temp[j];
+    // Transfer elements from temp[] back to a[]
+    PARA (i, i1, j2) {
+        a[i] = temp[i - i1];
+    }
 }

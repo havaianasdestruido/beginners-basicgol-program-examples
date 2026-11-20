@@ -1,21 +1,23 @@
+#include <basicgol.h>
+
 // Finding given number is Odd or Even using Bitwise AND(&) Operator
 // Checking the Least Significent Bit, if 0 print Even, otherwise print Odd
 
-#include<stdio.h>
+INICIO
+    INTEIRO num, mask = 0x1;
 
-int main(){
+    ESCREVA("Enter a number: ");
+    SE NAO LEIA_OK(num) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-  int num, mask = 0x1;
+    num &= mask;
 
-  printf("Enter a number: ");
-  scanf("%d", &num);
+    SE 0 == num ENTAO
+        ESCREVAL("Even Number");
+    SENAO
+        ESCREVAL("Odd Number");
+    FIM_SE
 
-  num &= mask;
-
-  if ( 0 == num)
-    printf("Even Number\n");
-  else
-    printf("Odd Number\n");
-
-  return 0;
-}
+    RETORNE 0;
+FIM

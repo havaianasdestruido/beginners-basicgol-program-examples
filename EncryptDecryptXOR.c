@@ -1,33 +1,29 @@
-#include<stdio.h>
-#include<string.h>
+#include <basicgol.h>
 
-char XORkey[12] = {'F','P','k','k','Y','P','l','p','V','P','L','z'};
-void encryptDecrypt();
+CARACTERE XORkey[12] = {'F', 'P', 'k', 'k', 'Y', 'P', 'l', 'p', 'V', 'P', 'L', 'z'};
+PROCEDIMENTO encryptDecrypt(CARACTERE inputString[]);
 
-int main() {
-	char sampleString[] = " This contains highly sensitive message\n"          \
-                          " coordinates : 23.445, 34.443\n"                    \
-                          " All further messages MUST be send via\n"           \
-                          " XOR encryption only - Long Live Revolution!!\n" ;
+INICIO
+    CARACTERE sampleString[] = " This contains highly sensitive message\n"
+                          " coordinates : 23.445, 34.443\n"
+                          " All further messages MUST be send via\n"
+                          " XOR encryption only - Long Live Revolution!!\n";
 
+    ESCREVAL("\nEncrypted String :");
+    encryptDecrypt(sampleString);
 
-	printf("\nEncrypted String :\n");
-	encryptDecrypt(sampleString);
+    ESCREVAL("\nDecyrpted String :");
+    encryptDecrypt(sampleString);
 
-	printf("\nDecyrpted String :\n");
-	encryptDecrypt(sampleString);
+    RETORNE 0;
+FIM
 
-	return 0;
+PROCEDIMENTO encryptDecrypt(CARACTERE inputString[]) {
+    INTEIRO i = 0;
+
+    INTEIRO len = TAMANHO_TEXTO(inputString);
+    PARA (i, 0, len - 1) {
+        inputString[i] = inputString[i] ^ XORkey[i MOD (TAMANHO_DE(XORkey) / TAMANHO_DE(CARACTERE))];
+        ESCREVA_FMT("%c", inputString[i]);
+    }
 }
-
-void encryptDecrypt(char inputString[]) {
-	int i = 0;
-
-	int len = strlen(inputString);
-	for (i = 0; i < len; i++) {
-		inputString[i] = inputString[i] ^ XORkey[i % (sizeof(XORkey)/sizeof(char))];
-		printf("%c", inputString[i]);
-	}
-
-}
-

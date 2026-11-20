@@ -1,41 +1,46 @@
-#include<stdio.h>
+#include <basicgol.h>
 
-int main()
-{
-    printf("\n\n\t\tStudytonight - Best place to learn\n\n\n");
-    int n, m, c, d, matrix[10][10];
-    int counter = 0;
-    printf("\nEnter the number of rows and columns of the matrix \n\n");
-    scanf("%d%d",&m,&n);
+INICIO
+    ESCREVAL("\n\n\t\tStudytonight - Best place to learn\n\n");
+    INTEIRO n, m, c, d, matrix[10][10];
+    INTEIRO counter = 0;
+    ESCREVAL("\nEnter the number of rows and columns of the matrix \n");
+    SE NAO LEIA_OK(m) OU NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-    printf("\nEnter the %d elements of the matrix \n\n", m*n);
-    for(c = 0; c < m; c++)   // to iterate the rows
+    ESCREVA_FMT("\nEnter the %d elements of the matrix \n\n", m * n);
+    PARA (c, 0, m - 1) // to iterate the rows
     {
-        for(d = 0; d < n; d++)   // to iterate the columns
+        PARA (d, 0, n - 1) // to iterate the columns
         {
-            scanf("%d", &matrix[c][d]);
-            if(matrix[c][d] == 0)
-            counter++;  // same as counter=counter +1
+            SE NAO LEIA_OK(matrix[c][d]) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+            SE matrix[c][d] == 0 ENTAO
+                counter++; // same as counter=counter +1
+            FIM_SE
         }
     }
 
     // printing the matrix
-    printf("\n\nThe entered matrix is: \n\n");
-    for(c = 0; c < m; c++)   // to iterate the rows
+    ESCREVAL("\n\nThe entered matrix is: \n");
+    PARA (c, 0, m - 1) // to iterate the rows
     {
-        for(d = 0; d < n; d++)   // to iterate the columns
+        PARA (d, 0, n - 1) // to iterate the columns
         {
-            printf("%d\t", matrix[c][d]);
+            ESCREVA_FMT("%d\t", matrix[c][d]);
         }
-    printf("\n"); // to take the control to the next row
+        ESCREVA_LINHA(); // to take the control to the next row
     }
 
     // checking if the matrix is sparse or not
-    if(counter > (m*n)/2)
-        printf("\n\nThe entered matrix is a sparse matrix\n\n");
-    else
-        printf("\n\nThe entered matrix is not a sparse matrix\n\n");
+    SE counter > (m * n) / 2 ENTAO
+        ESCREVAL("\n\nThe entered matrix is a sparse matrix\n");
+    SENAO
+        ESCREVAL("\n\nThe entered matrix is not a sparse matrix\n");
+    FIM_SE
 
-    printf("\n\n\t\t\tCoding is Fun !\n\n\n");
-    return 0;
-}
+    ESCREVAL("\n\n\t\t\tCoding is Fun !\n\n");
+    RETORNE 0;
+FIM

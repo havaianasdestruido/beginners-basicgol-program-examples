@@ -1,21 +1,23 @@
+#include <basicgol.h>
+
 // A simple arithmetic operation on two integers
 
-#include<stdio.h>
-
-int main() {
-   int number1, number2, addition, subtraction, multiplication, division, modulo;
-   printf("Enter two numbers :\n");
-   scanf("%d%d", & number1, & number2);
-   addition = number1 + number2;
-   subtraction = number1 - number2;
-   multiplication = number1 * number2;
-   division = number1 / number2;
-   modulo = number1 % number2;
-   printf("Addition of number 1 and number 2 : %d\n", addition);
-   printf("Subtraction of number 1 and number 2 : %d\n", subtraction);
-   printf("Multiplication of number 1 and number 2 : %d\n", multiplication);
-   printf("Division of number 1 and number 2 : %d\n", division);
-   printf("Modulo of number 1 and number 2 : %d\n", modulo);
-   return 0;
-
-}
+INICIO
+    INTEIRO number1, number2, addition, subtraction, multiplication, division, modulo;
+    ESCREVAL("Enter two numbers :");
+    SE NAO LEIA_OK(number1) OU NAO LEIA_OK(number2) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    AFIRME(number2 != 0, "Division by zero");
+    addition = number1 + number2;
+    subtraction = number1 - number2;
+    multiplication = number1 * number2;
+    division = number1 / number2;
+    modulo = number1 MOD number2;
+    ESCREVA_FMT("Addition of number 1 and number 2 : %d\n", addition);
+    ESCREVA_FMT("Subtraction of number 1 and number 2 : %d\n", subtraction);
+    ESCREVA_FMT("Multiplication of number 1 and number 2 : %d\n", multiplication);
+    ESCREVA_FMT("Division of number 1 and number 2 : %d\n", division);
+    ESCREVA_FMT("Modulo of number 1 and number 2 : %d\n", modulo);
+    RETORNE 0;
+FIM

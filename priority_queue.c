@@ -1,182 +1,199 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include <basicgol.h>
 
-int CAPACITY = 10;
-int size;
+INTEIRO CAPACITY = 10;
+INTEIRO size;
 
-typedef struct task {
-    int id;
-    int priority;
-}task;
+REGISTRO(task)
+    INTEIRO id;
+    INTEIRO priority;
+FIM_REGISTRO(task);
 
-int getLeftChildIndex(int i);
-int getRightChildIndex(int i);
-int getParentIndex(int i);
-bool hasLeftChild(int i);
-bool hasRightChild(int i);
-bool hasParent(int i);
-task leftChild(int i, task* taskList);
-task rightChild(int i, task* taskList);
-task parent(int i, task* taskList);
-void swap(int i, int j, task* taskList);
-void ensureExtraCapacity(task** taskList);
-task peek(task *taskList);
-task poll(task *taskList);
-void addTask(task t, task* taskList);
-void heapifyUp(task* taskList);
-void heapifyDown(task* taskList);
+FUNCAO INTEIRO getLeftChildIndex(INTEIRO i);
+FUNCAO INTEIRO getRightChildIndex(INTEIRO i);
+FUNCAO INTEIRO getParentIndex(INTEIRO i);
+FUNCAO LOGICO hasLeftChild(INTEIRO i);
+FUNCAO LOGICO hasRightChild(INTEIRO i);
+FUNCAO LOGICO hasParent(INTEIRO i);
+FUNCAO task leftChild(INTEIRO i, task *taskList);
+FUNCAO task rightChild(INTEIRO i, task *taskList);
+FUNCAO task parent(INTEIRO i, task *taskList);
+PROCEDIMENTO swap(INTEIRO i, INTEIRO j, task *taskList);
+PROCEDIMENTO ensureExtraCapacity(task **taskList);
+FUNCAO task peek(task *taskList);
+FUNCAO task poll(task *taskList);
+PROCEDIMENTO addTask(task t, task *taskList);
+PROCEDIMENTO heapifyUp(task *taskList);
+PROCEDIMENTO heapifyDown(task *taskList);
 
-
-int main() {
-    task *taskList = malloc(sizeof(int)*CAPACITY);
+INICIO
+    task *taskList = malloc(TAMANHO_DE(task) * CAPACITY);
+    AFIRME(taskList != NULL, "Allocation failed");
     task task;
-    int op;
-    printf("\tIn this program the greater the priority value of the task, the higher is the priority of the task\n");
-    for(int i = 0; i < 110; ++i)
-            printf("-");
-    printf("\n");
-    do {
-        printf("1...Enter a new task\n");
-        printf("2...Remove highest priority task\n");
-        printf("3...Show highest priority task\n");
-        printf("4...Exit\n");
-        printf("Enter you option below:\n");
-        printf("-> "); scanf("%d", &op);
-        printf("\n");
-        
-        switch(op) {
-            case 1:
-                printf("Enter the task ID:\n");
-                printf("-> "); scanf("%d", &task.id);
-
-                printf("Enter the task Priority:\n");
-                printf("-> "); scanf("%d", &task.priority);
-
-                addTask(task, taskList);
-            break;
-            case 2:
-                task = poll(taskList);
-                printf("Element Processed is:\n");
-                printf("ID: %d\n", task.id);
-                printf("Priority: %d\n", task.priority);
-            break;
-            case 3:
-                task = peek(taskList);
-                printf("Element Ready to be Processed first is:\n");
-                printf("ID: %d\n", task.id);
-                printf("Priority: %d\n", task.priority);
-            break;
-            case 4:
-                // nothing to see here...
-            break;
-            default:
-                printf("Invalid option entered, please try again !\n\n");
-            break;
-        }
-        for(int i = 0; i < 100; ++i)
-            printf("-");
-        printf("\n");
-    } while(op != 4);
-    free(taskList);
-    return 0;
-}
-
-void heapifyDown(task* taskList) {
-    int index = 0;
-    int greaterChildIndex = getLeftChildIndex(index);
-    while(hasLeftChild(index)) {
-        if(hasRightChild(index) && rightChild(index, taskList).priority > leftChild(index, taskList).priority) {
-            greaterChildIndex = getRightChildIndex(index);
-        }
-        if(taskList[index].priority > taskList[greaterChildIndex].priority) {
-            break;
-        }
-        else {
-            swap(index, greaterChildIndex, taskList);
-        }
-        index = greaterChildIndex;
+    INTEIRO op;
+    ESCREVAL("\tIn this program the greater the priority value of the task, the higher is the priority "
+             "of the task");
+    INTEIRO i;
+    PARA (i, 0, 109) {
+        ESCREVA("-");
     }
+    ESCREVA_LINHA();
+    REPITA
+        ESCREVAL("1...Enter a new task");
+        ESCREVAL("2...Remove highest priority task");
+        ESCREVAL("3...Show highest priority task");
+        ESCREVAL("4...Exit");
+        ESCREVAL("Enter you option below:");
+        ESCREVA("-> ");
+        SE NAO LEIA_OK(op) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+        ESCREVA_LINHA();
+
+        ESCOLHA(op)
+        CASO 1:
+            ESCREVAL("Enter the task ID:");
+            ESCREVA("-> ");
+            SE NAO LEIA_OK(task.id) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+
+            ESCREVAL("Enter the task Priority:");
+            ESCREVA("-> ");
+            SE NAO LEIA_OK(task.priority) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+
+            ensureExtraCapacity(&taskList);
+            addTask(task, taskList);
+            PARE;
+        CASO 2:
+            task = poll(taskList);
+            ESCREVAL("Element Processed is:");
+            ESCREVA_FMT("ID: %d\n", task.id);
+            ESCREVA_FMT("Priority: %d\n", task.priority);
+            PARE;
+        CASO 3:
+            task = peek(taskList);
+            ESCREVAL("Element Ready to be Processed first is:");
+            ESCREVA_FMT("ID: %d\n", task.id);
+            ESCREVA_FMT("Priority: %d\n", task.priority);
+            PARE;
+        CASO 4:
+            // nothing to see here...
+            PARE;
+        CONTRARIO:
+            ESCREVAL("Invalid option entered, please try again !\n");
+            PARE;
+        FIM_ESCOLHA
+        INTEIRO lineIndex;
+        PARA (lineIndex, 0, 99) {
+            ESCREVA("-");
+        }
+        ESCREVA_LINHA();
+    ATE_QUE(op == 4);
+    free(taskList);
+    RETORNE 0;
+FIM
+
+PROCEDIMENTO heapifyDown(task *taskList) {
+    INTEIRO index = 0;
+    INTEIRO greaterChildIndex;
+    ENQUANTO hasLeftChild(index) FACA
+        greaterChildIndex = getLeftChildIndex(index);
+        SE hasRightChild(index) E
+            rightChild(index, taskList).priority > leftChild(index, taskList).priority ENTAO
+            greaterChildIndex = getRightChildIndex(index);
+        FIM_SE
+        SE taskList[index].priority > taskList[greaterChildIndex].priority ENTAO
+            PARE;
+        SENAO
+            swap(index, greaterChildIndex, taskList);
+        FIM_SE
+        index = greaterChildIndex;
+    FIM_ENQUANTO
 }
 
-void heapifyUp(task* taskList) {
-    int index = size - 1;
-    while(hasParent(index) && parent(index, taskList).priority < taskList[index].priority) {
+PROCEDIMENTO heapifyUp(task *taskList) {
+    INTEIRO index = size - 1;
+    ENQUANTO hasParent(index) E parent(index, taskList).priority < taskList[index].priority FACA
         swap(getParentIndex(index), index, taskList);
         index = getParentIndex(index);
-    }
+    FIM_ENQUANTO
 }
 
-void addTask(task t, task* taskList) {
-    ensureExtraCapacity(&taskList);
+PROCEDIMENTO addTask(task t, task *taskList) {
     taskList[size] = t;
     ++size;
     heapifyUp(taskList);
 }
 
-task poll(task *taskList) {
-    if(!size) {
-        printf("Error !\n");
+FUNCAO task poll(task *taskList) {
+    SE NAO size ENTAO
+        ESCREVAL("Error !");
         exit(0);
-    }
+    FIM_SE
     task t = taskList[0];
-    taskList[0] = taskList[size-1];
+    taskList[0] = taskList[size - 1];
     --size;
     heapifyDown(taskList);
-    return t;
+    RETORNE t;
 }
 
-task peek(task *taskList) {
-    if(!size) {
-        printf("Error !\n");
+FUNCAO task peek(task *taskList) {
+    SE NAO size ENTAO
+        ESCREVAL("Error !");
         exit(0);
-    }
-    return taskList[0];
+    FIM_SE
+    RETORNE taskList[0];
 }
 
-void ensureExtraCapacity(task** taskList) {
-    if(size > 2*CAPACITY/3)
-        *taskList = realloc(*taskList,CAPACITY*=2);
+PROCEDIMENTO ensureExtraCapacity(task **taskList) {
+    SE size == CAPACITY ENTAO
+        CAPACITY *= 2;
+        task *larger = realloc(*taskList, CAPACITY * TAMANHO_DE(task));
+        AFIRME(larger != NULL, "Allocation failed");
+        *taskList = larger;
+    FIM_SE
 }
 
-void swap(int i, int j, task* taskList) {
+PROCEDIMENTO swap(INTEIRO i, INTEIRO j, task *taskList) {
     task temp = taskList[i];
     taskList[i] = taskList[j];
     taskList[j] = temp;
 }
 
-task parent(int i, task* taskList) {
-    return taskList[getParentIndex(i)];
+FUNCAO task parent(INTEIRO i, task *taskList) {
+    RETORNE taskList[getParentIndex(i)];
 }
 
-task rightChild(int i, task* taskList) {
-    return taskList[getRightChildIndex(i)];
+FUNCAO task rightChild(INTEIRO i, task *taskList) {
+    RETORNE taskList[getRightChildIndex(i)];
 }
 
-task leftChild(int i, task* taskList) {
-    return taskList[getLeftChildIndex(i)];
+FUNCAO task leftChild(INTEIRO i, task *taskList) {
+    RETORNE taskList[getLeftChildIndex(i)];
 }
 
-bool hasParent(int i) {
-    return getParentIndex(i) >= 0;
+FUNCAO LOGICO hasParent(INTEIRO i) {
+    RETORNE i > 0;
 }
 
-bool hasRightChild(int i) {
-    return getRightChildIndex(i) < size;
+FUNCAO LOGICO hasRightChild(INTEIRO i) {
+    RETORNE getRightChildIndex(i) < size;
 }
 
-bool hasLeftChild(int i) {
-    return getLeftChildIndex(i) < size;
+FUNCAO LOGICO hasLeftChild(INTEIRO i) {
+    RETORNE getLeftChildIndex(i) < size;
 }
 
-int getLeftChildIndex(int i) {
-    return 2*i + 1;
+FUNCAO INTEIRO getLeftChildIndex(INTEIRO i) {
+    RETORNE 2 * i + 1;
 }
 
-int getRightChildIndex(int i) {
-    return 2*i + 2;
+FUNCAO INTEIRO getRightChildIndex(INTEIRO i) {
+    RETORNE 2 * i + 2;
 }
 
-int getParentIndex(int i) {
-    return (i-1)/2;
+FUNCAO INTEIRO getParentIndex(INTEIRO i) {
+    RETORNE (i - 1) / 2;
 }

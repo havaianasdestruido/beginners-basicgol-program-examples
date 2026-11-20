@@ -1,41 +1,42 @@
+#include <basicgol.h>
+
 // Function that takes a string "haystack" and a string "needle"
 // and checks if needle appears in haystack
 
-#include <stdio.h>
-#include <string.h>
+FUNCAO INTEIRO SubString(CARACTERE *haystack, CARACTERE *needle) {
+    INTEIRO bigIndex = 0;
+    INTEIRO littleIndex = 0;
 
-int SubString(char *haystack, char *needle ){
-	int bigIndex = 0;
-	int littleIndex = 0;
-
-	// Iterate through Haystack until a match is found
-	// then iterate through both strings until the end of needle
-	// or a difference is found
-	while (haystack[bigIndex] != '\0'){
-		while (haystack[bigIndex + littleIndex] == needle[littleIndex]){
-			if (needle[littleIndex + 1] == '\0')
-				return (1);
-			littleIndex++;
-		}
-		littleIndex = 0;\
-		bigIndex++;
-	}
-	return (0);
+    // Iterate through Haystack until a match is found
+    // then iterate through both strings until the end of needle
+    // or a difference is found
+    ENQUANTO haystack[bigIndex] != '\0' FACA
+        ENQUANTO haystack[bigIndex + littleIndex] == needle[littleIndex] FACA
+            SE needle[littleIndex + 1] == '\0' ENTAO
+                RETORNE (1);
+            FIM_SE
+            littleIndex++;
+        FIM_ENQUANTO
+        littleIndex = 0;
+        bigIndex++;
+    FIM_ENQUANTO
+    RETORNE (0);
 }
 
-int main(){
-	char	needle[100];
-	char	haystack[100];
+INICIO
+    TEXTO_FIXO(needle, 100);
+    TEXTO_FIXO(haystack, 100);
 
-	// Getting input
-	printf("Please enter your Haystack string (< 100 characters): ");
-	scanf("%s", haystack);
-	printf("Please enter your Needle string (< 100 characters): ");
-	scanf("%s", needle);
+    // Getting input
+    ESCREVA("Please enter your Haystack string (< 100 characters): ");
+    AFIRME(scanf("%99s", haystack) == 1, "Invalid input");
+    ESCREVA("Please enter your Needle string (< 100 characters): ");
+    AFIRME(scanf("%99s", needle) == 1, "Invalid input");
 
-	if (SubString(haystack, needle))
-		printf("Needle was found in Haystack!\n");
-	else
-		printf("Needle not found in Haystack\n");
-	return (0);
-}
+    SE SubString(haystack, needle) ENTAO
+        ESCREVAL("Needle was found in Haystack!");
+    SENAO
+        ESCREVAL("Needle not found in Haystack");
+    FIM_SE
+    RETORNE (0);
+FIM
