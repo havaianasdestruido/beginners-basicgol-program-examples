@@ -1,29 +1,27 @@
-//A c program to print prime numbers from 1 to n
+#include <basicgol.h>
 
-#include<stdio.h>
-#include<math.h>
-void main(){
-    int num, i, j,check;
-    printf("Enter number: ");
-    scanf("%d",&num);
-    printf("Prime numbers are:\n");
-    //traversing all numbers from 2 to entered integer num
-    for(i=2; i<num; i++)
-    {
-        //loop to check divisibility
-        for(j=2; j<i; j++)
-        {
-            //checking if it is divisible by any smaller number
-            check=sqrt(i);
-            if(check%j == 0)
-            {
-                //if it is divisible exiting from loop
-                break;
-            }
+// A c program to print prime numbers from 1 to n
+
+INICIO
+    INTEIRO num, i, j;
+    ESCREVA("Enter number: ");
+    SE NAO LEIA_OK(num) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCREVAL("Prime numbers are:");
+    // traversing all numbers from 2 to entered integer num
+    PARA (i, 2, num) {
+        // loop to check divisibility
+        PARA (j, 2, i - 1) {
+            // checking if it is divisible by any smaller number
+            SE i MOD j == 0 ENTAO
+                // if it is divisible exiting from loop
+                PARE;
+            FIM_SE
         }
-        //printing the number if it is never divisible by numbers smaller than itself
-        if(i == j){
-            printf("%d\n", i);
-        }
+        // printing the number if it is never divisible by numbers smaller than itself
+        SE i == j ENTAO
+            ESCREVA_FMT("%d\n", i);
+        FIM_SE
     }
-}
+FIM

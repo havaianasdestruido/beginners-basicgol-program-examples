@@ -1,11 +1,14 @@
-#include<stdio.h>
-void main()
-{ float a,c;
- int b;
-printf("Enter the Number : ");
-scanf("%f",&a);
-b=a/1;
-c=a-b;
-printf("Integer Part is : %d\n",b);
-printf("Decimal Part is : %f",c);
-}
+#include <basicgol.h>
+
+INICIO
+    REAL_CURTO a, c;
+    INTEIRO b;
+    ESCREVA("Enter the Number : ");
+    SE NAO LEIA_OK(a) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    b = a / 1;
+    c = a - b;
+    ESCREVA_FMT("Integer Part is : %d\n", b);
+    ESCREVA_FMT("Decimal Part is : %f", c);
+FIM

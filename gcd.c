@@ -1,37 +1,40 @@
-    #include <stdio.h>
-    #include <string.h>
-    #include <stdlib.h>
+#include <basicgol.h>
 
-    int gcd(int x, int y) {
-        int r = 0, a, b;
-        a = (x > y) ? x : y; // a is greater number
-        b = (x < y) ? x : y; // b is smaller number
-        r = b;
+FUNCAO INTEIRO gcd(INTEIRO x, INTEIRO y) {
+    INTEIRO r = 0, a, b;
+    a = (x > y) ? x : y; // a is greater number
+    b = (x < y) ? x : y; // b is smaller number
+    r = b;
 
-        while (a % b != 0) {
-            r = a % b;
-            a = b;
-            b = r;
-        }
-        return r;
-    }     
+    ENQUANTO a MOD b != 0 FACA
+        r = a MOD b;
+        a = b;
+        b = r;
+    FIM_ENQUANTO
+    RETORNE r;
+}
 
-    int lcm(int x, int y) {
-        int a;
-        a = (x > y) ? x : y; // a is greater number
-        while (1) {
-            if (a % x == 0 && a % y == 0)
-                return a;
-            ++a;
-        }
-    }     
+FUNCAO INTEIRO lcm(INTEIRO x, INTEIRO y) {
+    INTEIRO a;
+    a = (x > y) ? x : y; // a is greater number
+    ENQUANTO VERDADEIRO FACA
+        SE a MOD x == 0 E a MOD y == 0 ENTAO
+            RETORNE a;
+        FIM_SE
+        ++a;
+    FIM_ENQUANTO
+}
 
-    int main(int argc, char **argv) {
-        printf("Enter the two numbers: ");
-        int x, y;
-        scanf("%d", &x);
-        scanf("%d", &y);
-        printf("The GCD of two numbers is: %d", gcd(x, y));
-        printf("The LCM of two numbers is: %d", lcm(x, y));
-        return 0;
-    }
+INICIO
+    ESCREVA("Enter the two numbers: ");
+    INTEIRO x, y;
+    SE NAO LEIA_OK(x) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    SE NAO LEIA_OK(y) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCREVA_FMT("The GCD of two numbers is: %d", gcd(x, y));
+    ESCREVA_FMT("The LCM of two numbers is: %d", lcm(x, y));
+    RETORNE 0;
+FIM

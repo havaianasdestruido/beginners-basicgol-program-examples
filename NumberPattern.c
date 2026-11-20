@@ -1,3 +1,5 @@
+#include <basicgol.h>
+
 /*Prints the pattern
 1
 2 3
@@ -5,22 +7,20 @@
 7 8 9 10
 .
 */
-#include <stdio.h>
-int main()
-{
-    int i, j, rows ,num=1;
+INICIO
+    INTEIRO i, j, rows, num = 1;
 
-    printf("Enter number of rows: ");
-    scanf("%d",&rows);
+    ESCREVA("Enter number of rows: ");
+    SE NAO LEIA_OK(rows) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-    for(i=1; i<=rows; i++)
-    {
-        for(j=1; j<=i; j++)
-        {
-            printf("%3d ",num);
+    PARA (i, 1, rows) {
+        PARA (j, 1, i) {
+            ESCREVA_FMT("%3d ", num);
             num++;
         }
-        printf("\n");
+        ESCREVA_LINHA();
     }
-    return 0;
-}
+    RETORNE 0;
+FIM

@@ -1,26 +1,25 @@
-#include <stdio.h>
-int main()
-{
-    int n, i;
-    unsigned long long factorial = 1;
-    //unsigned long long is the same as unsigned long long int. 
-    //Its size is platform-dependent, but guaranteed by the C standard (ISO C99) to be at least 64 bits. 
+#include <basicgol.h>
+#include <inttypes.h>
 
-    printf("Enter a number: ");
-    scanf("%d",&n);
+INICIO
+    INTEIRO n, i;
+    NATURAL64 factorial = 1;
+
+    ESCREVA("Enter a number: ");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
     // Show error if number is less than 0
-    if (n < 0)
-        printf("Error! Factorial of a negative number doesn't exist.");
-
-    else
-    {
-        for(i=1; i<=n; ++i)
-        {
-            factorial *= i;              // factorial = factorial*i;
+    AFIRME(n <= 20, "Result exceeds 64 bits");
+    SE n < 0 ENTAO
+        ESCREVA("Error! Factorial of a negative number doesn't exist.");
+    SENAO
+        PARA (i, 1, n) {
+            factorial *= i; // factorial = factorial*i;
         }
-        printf("Factorial of %d = %llu", n, factorial);
-    }
+        ESCREVA_FMT("Factorial of %d = %" PRIu64, n, factorial);
+    FIM_SE
 
-    return 0;
-}
+    RETORNE 0;
+FIM

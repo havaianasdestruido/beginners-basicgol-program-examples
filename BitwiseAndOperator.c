@@ -1,11 +1,10 @@
+#include <basicgol.h>
+
 // Bitwise and operator
 
-#include <stdio.h>
-int main()
-{
-    int a=14, b= 7, c;
-    c =a&b;
-    printf("Value of c = %d\n",c);
-    return 0;
-
-}
+INICIO
+    INTEIRO a = 14, b = 7, c;
+    c = a & b;
+    ESCREVA_FMT("Value of c = %d\n", c);
+    RETORNE 0;
+FIM

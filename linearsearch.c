@@ -1,28 +1,34 @@
-#include<stdio.h>
-int main()
-{
-  int n=0;
-  int i,a[];
-  int x,c=0;
-  printf("ENTER SIZE OF ARRAY AND ARRAY ELEMENTS\n");
-  scanf("%d",&n);
-  for(i=0;i<n;i++)
-  {
-    scanf("%d",&a[i]);
-  }
-  printf("ENTER ELEMENT TO SEARCH\n");
-  scanf("%d",&x);
-  for(i=0;i<n;i++)
-  {
-    if(a[i]==x)
-    {
-      printf("FOUND AT INDEX %d",i);
-      break;
+#include <basicgol.h>
+
+INICIO
+    INTEIRO n = 0;
+    INTEIRO i, a[100];
+    INTEIRO x, c = 0;
+    ESCREVAL("ENTER SIZE OF ARRAY AND ARRAY ELEMENTS");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    SE n < 1 OU n > 100 ENTAO
+        RETORNE 1;
+    FIM_SE
+    PARA (i, 0, n - 1) {
+        SE NAO LEIA_OK(a[i]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
     }
-  }
-    if(c==0)
-    {
-      printf("ELEMENT NOT FOUND");
+    ESCREVAL("ENTER ELEMENT TO SEARCH");
+    SE NAO LEIA_OK(x) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    PARA (i, 0, n - 1) {
+        SE a[i] == x ENTAO
+            ESCREVA_FMT("FOUND AT INDEX %d", i);
+            c = 1;
+            PARE;
+        FIM_SE
     }
-  return 1;
-}
+    SE c == 0 ENTAO
+        ESCREVA("ELEMENT NOT FOUND");
+    FIM_SE
+    RETORNE 0;
+FIM

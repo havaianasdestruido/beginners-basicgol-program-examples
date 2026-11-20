@@ -1,8 +1,11 @@
-#include<stdio.h>
-void main()
-{ float a,c,f;
-printf("Enter the Temperature in Celcius : ");
-scanf("%f",&c);
-f=c*(9/5)+32;
-printf("Temperature in Fahernheit is %f",f);
-}
+#include <basicgol.h>
+
+INICIO
+    REAL_CURTO c, f;
+    ESCREVA("Enter the Temperature in Celcius : ");
+    SE NAO LEIA_OK(c) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    f = c * (9.0 / 5) + 32;
+    ESCREVA_FMT("Temperature in Fahernheit is %f", f);
+FIM

@@ -1,26 +1,30 @@
-#include<stdio.h>
-int main()
-{
-    int i,j,n;
-    printf("enter the number of elements in an arrays\n");
-    scanf("%d",&n);
-    int a[n],b[n];
-    printf("enter the elements of 1st array\n");
-    for(i=0;i<n;i++)
-    {
-        scanf("%d",&a[i]);
+#include <basicgol.h>
+
+INICIO
+    INTEIRO i, j, n;
+    ESCREVAL("enter the number of elements in an arrays");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    INTEIRO a[n], b[n];
+    ESCREVAL("enter the elements of 1st array");
+    PARA (i, 0, n - 1) {
+        SE NAO LEIA_OK(a[i]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
     }
-    printf("enter the elements of 2nd array\n");
-    for(j=0;j<n;j++)
-    {
-        scanf("%d",&b[j]);
+    ESCREVAL("enter the elements of 2nd array");
+    PARA (j, 0, n - 1) {
+        SE NAO LEIA_OK(b[j]) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
     }
-    printf("The common numbers are: ");
-   for(i=0; i<n; i++){
-	   for(j=0;j<n;j++){
-		   if(a[i]==b[j]){
-			   printf("%d\n", b[j]);
-			   }
-		   }
+    ESCREVA("The common numbers are: ");
+    PARA (i, 0, n - 1) {
+        PARA (j, 0, n - 1) {
+            SE a[i] == b[j] ENTAO
+                ESCREVA_FMT("%d\n", b[j]);
+            FIM_SE
+        }
     }
-}
+FIM

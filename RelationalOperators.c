@@ -1,47 +1,54 @@
+#include <basicgol.h>
+
 // Relational operators in c language
 
-#include<stdio.h>
-int main()
-{
-    int a, b;
-    printf("Enter two numbers a and b respectively\n");
-    scanf("%d%d",&a,&b);
+INICIO
+    INTEIRO a, b;
+    ESCREVAL("Enter two numbers a and b respectively");
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(b) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
     // Greater than operator
-    if (a>b)
-        printf("a is greater than b\n");
-    else
-        printf("a is smaller than b\n");
+    SE a > b ENTAO
+        ESCREVAL("a is greater than b");
+    SENAO
+        ESCREVAL("a is smaller than b");
+    FIM_SE
 
     // Greater than equal to
-    if (a>=b)
-        printf("a is greater than equal to b\n");
-    else
-        printf("a is not greater than equal to b\n");
+    SE a >= b ENTAO
+        ESCREVAL("a is greater than equal to b");
+    SENAO
+        ESCREVAL("a is not greater than equal to b");
+    FIM_SE
 
-    //Less than
-    if (a<b)
-        printf("a is less than b\n");
-    else
-        printf("a is greater than b\n");
+    // Less than
+    SE a < b ENTAO
+        ESCREVAL("a is less than b");
+    SENAO
+        ESCREVAL("a is greater than b");
+    FIM_SE
 
-    //Lesser than equal to
-    if (a<=b)
-        printf("a is less than equal to b\n");
-    else
-        printf("a is greater than equal to b\n");
+    // Lesser than equal to
+    SE a <= b ENTAO
+        ESCREVAL("a is less than equal to b");
+    SENAO
+        ESCREVAL("a is greater than equal to b");
+    FIM_SE
 
-    //equal to
-    if (a==b)
-        printf("a is equal to b\n");
-    else
-        printf("a is not equal to b\n");
+    // equal to
+    SE a == b ENTAO
+        ESCREVAL("a is equal to b");
+    SENAO
+        ESCREVAL("a is not equal to b");
+    FIM_SE
 
-    //not equal to
-    if (a!=b)
-        printf("a is not equal to b\n");
-    else
-        printf("a is equal to b\n");
+    // not equal to
+    SE a != b ENTAO
+        ESCREVAL("a is not equal to b");
+    SENAO
+        ESCREVAL("a is equal to b");
+    FIM_SE
 
-    return 0;
-
-}
+    RETORNE 0;
+FIM

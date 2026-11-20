@@ -1,15 +1,16 @@
+#include <basicgol.h>
+
 // Swap two integers using third variable
 
-
-#include<stdio.h>
-int main()
-{
-    int a,b,c;
-    printf("Enter two no :\n");
-    scanf("%d%d",&a,&b);
-    c=a;
-    a=b;
-    b=c;
-    printf("After swapping value of a = %d\n b =%d",a,b);
-    return 0;
-}
+INICIO
+    INTEIRO a, b, c;
+    ESCREVAL("Enter two no :");
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(b) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    c = a;
+    a = b;
+    b = c;
+    ESCREVA_FMT("After swapping value of a = %d\n b =%d", a, b);
+    RETORNE 0;
+FIM

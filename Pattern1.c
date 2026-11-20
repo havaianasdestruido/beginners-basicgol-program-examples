@@ -1,66 +1,54 @@
-#include <stdio.h>
-int main()
-{
+#include <basicgol.h>
 
-	/** Program to print the following pattern:
-				
-				*
-				**
-				***
-				****	
-				*****
-	**/
-	int i,j,k;//Declaration of variable
-	for(i=1;i<=5;i++)
-	{
-		for(j=1;j<=i;j++)
-		{
-			printf("*");
-		}
-		printf("\n");
-	}
-	
-/** Program to print the following pattern:
-	
-    1
-   123
-  12345
- 1234567
-123456789
- 1234567
-  12345
-   123
-    1
-    
+INICIO
+    /** Program to print the following pattern:
+
+                            *
+                            **
+                            ***
+                            ****
+                            *****
     **/
-	for (i=1;i<=5;i++)
-    	{
-		for (j=i;j<5;j++)
-		{
-		    printf(" ");
-		}
-		for (k=1;k<(i*2);k++)
-		{
-		    printf("%d",k);
-		}
-        printf("\n");
+    INTEIRO i, j, k; // Declaration of variable
+    PARA (i, 1, 5) {
+        PARA (j, 1, i) {
+            ESCREVA("*");
+        }
+        ESCREVA_LINHA();
     }
 
-    for (i=4;i>=1;i--)
-    {
-		for (j=5;j>i;j--)
-		{
-		    printf(" ");
-		}
-		    for (k=1;k<(i*2);k++)
-		{
-		    printf("%d",k);
-		}
-        printf("\n");
-    }
-	
-	
-	
-	return 0;
-}
+    /** Program to print the following pattern:
 
+        1
+       123
+      12345
+     1234567
+    123456789
+     1234567
+      12345
+       123
+        1
+
+        **/
+    PARA (i, 1, 5) {
+        PARA (j, i, 4) {
+            ESCREVA(" ");
+        }
+        PARA (k, 1, (i * 2) - 1) {
+            ESCREVA_FMT("%d", k);
+        }
+        ESCREVA_LINHA();
+    }
+
+    PARA_PASSO (i, 4, 1, -1) {
+        PARA_PASSO (j, 5, i + 1, -1) {
+            ESCREVA(" ");
+        }
+        PARA (k, 1, (i * 2) - 1) {
+            ESCREVA_FMT("%d", k);
+        }
+        ESCREVA_LINHA();
+    }
+
+    RETORNE 0;
+FIM

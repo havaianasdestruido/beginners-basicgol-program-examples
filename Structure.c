@@ -1,33 +1,36 @@
-#include <stdio.h>
-struct student
-{
-    char name[50];
-    int roll;
-    float marks;
-} s;
+#include <basicgol.h>
 
-int main()
-{
-    printf("Enter information:\n");
+REGISTRO(student)
+    TEXTO_FIXO(name, 50);
+    INTEIRO roll;
+    REAL_CURTO marks;
+FIM_REGISTRO(student);
+student s;
 
-    printf("Enter name: ");
-    scanf("%s", s.name);
+INICIO
+    ESCREVAL("Enter information:");
 
-    printf("Enter roll number: ");
-    scanf("%d", &s.roll);
+    ESCREVA("Enter name: ");
+    AFIRME(scanf("%49s", s.name) == 1, "Invalid input");
 
-    printf("Enter marks: ");
-    scanf("%f", &s.marks);
+    ESCREVA("Enter roll number: ");
+    SE NAO LEIA_OK(s.roll) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
+    ESCREVA("Enter marks: ");
+    SE NAO LEIA_OK(s.marks) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-    printf("Displaying Information:\n");
+    ESCREVAL("Displaying Information:");
 
-    printf("Name: ");
-    puts(s.name);
+    ESCREVA("Name: ");
+    ESCREVAL(s.name);
 
-    printf("Roll number: %d\n",s.roll);
+    ESCREVA_FMT("Roll number: %d\n", s.roll);
 
-    printf("Marks: %.1f\n", s.marks);
+    ESCREVA_FMT("Marks: %.1f\n", s.marks);
 
-    return 0;
-}
+    RETORNE 0;
+FIM

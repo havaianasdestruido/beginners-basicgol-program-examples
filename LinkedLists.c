@@ -1,323 +1,236 @@
-//Normal LL with all fns
-//kinda incomplete - work in progress
-//TO ADD - fn to reverse the LL
+#include <basicgol.h>
 
+// Menu-driven singly linked list.
 
-#include<stdio.h>
-#include<stdlib.h>
+REGISTRO(node)
+    INTEIRO info;
+    struct node *link;
+FIM_REGISTRO(node);
 
-struct node
-{
-	int info;
-	struct node* link;
-};
+node *head = NULL, *head2 = NULL;
 
-typedef struct node node;
+PROCEDIMENTO Binsert(INTEIRO);
+PROCEDIMENTO Einsert(INTEIRO, node *);
+PROCEDIMENTO Minsert(INTEIRO);
+PROCEDIMENTO Display(node *);
+PROCEDIMENTO Bdelete(VAZIO);
+PROCEDIMENTO Edelete(VAZIO);
+PROCEDIMENTO Mdelete(INTEIRO);
+PROCEDIMENTO DeleteLL(node *);
+PROCEDIMENTO copy(VAZIO);
+PROCEDIMENTO reverse(VAZIO);
 
-node *head=NULL, *head2=NULL;
+INICIO
+    ENQUANTO VERDADEIRO FACA
+        INTEIRO opt, ele;
+        ESCREVAL("\nEnter what you wanna "
+                 "do:\n1.Binsert\n2.Einsert\n3.Minsert\n4.Display\n5.Bdelete\n6.Edelete\n7.Mdelete\n8."
+                 "Copy\n9.DeleteLL\n10.Reverse\n11.Quit");
+        SE NAO LEIA_OK(opt) ENTAO
+            ERRO("Invalid input");
+        FIM_SE
+        ESCOLHA(opt)
+        CASO 1: {
+            ESCREVA("\nEnter the element");
+            SE NAO LEIA_OK(ele) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+            Binsert(ele);
+            PARE;
+        }
+        CASO 2: {
+            ESCREVA("\nEnter the element");
+            SE NAO LEIA_OK(ele) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+            Einsert(ele, head);
+            PARE;
+        }
+        CASO 3: {
+            ESCREVA("\nEnter the element");
+            SE NAO LEIA_OK(ele) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+            Minsert(ele);
+            PARE;
+        }
+        CASO 4: {
+            ESCREVA("\nEnter the LL(1/2)");
+            SE NAO LEIA_OK(ele) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+            SE ele == 1 ENTAO
+                Display(head);
+            SENAO
+                Display(head2);
+            FIM_SE
+            PARE;
+        }
+        CASO 5: {
+            Bdelete();
+            PARE;
+        }
+        CASO 6: {
+            Edelete();
+            PARE;
+        }
+        CASO 7: {
+            ESCREVA("\nEnter the element you wanna delete:");
+            SE NAO LEIA_OK(ele) ENTAO
+                ERRO("Invalid input");
+            FIM_SE
+            Mdelete(ele);
+            PARE;
+        }
+        CASO 8:
+            copy();
+            PARE;
+        CASO 9:
+            DeleteLL(head); head = NULL;
+            PARE;
+        CASO 10:
+            reverse();
+            PARE;
+        CASO 11:
+            DeleteLL(head); DeleteLL(head2);
+            RETORNE 0;
+        FIM_ESCOLHA
+    FIM_ENQUANTO
+    RETORNE 0;
+FIM
 
-//*head=NULL;
-//*head2=NULL;
+PROCEDIMENTO Binsert(INTEIRO ele) {
 
-void Binsert(int);
-void Einsert(int,node*);
-void Minsert(int);
-void Display(node*);
-void Bdelete();
-void Edelete();
-void Mdelete(int);
-void DeleteLL(node*);
-//void copy();
-//node* locate(node*, int);
-//void reverse(node*);
-//void swaplink(node*);
-//void len(node*);
-
-
-int main()
-{
-	while(1)
-	{
-		int opt,ele;
-		printf("\nEnter what you wanna do:\n1.Binsert\n2.Einsert\n3.Minsert\n4.Display\n5.Bdelete\n6.Edelete\n7.Mdelete\n8.Copy\n9.DeleteLL\n10.Reverse\n11.Quit\n");
-		scanf("%d",&opt);
-		switch(opt)
-		{
-			case 1:
-				{
-					printf("\nEnter the element");
-					scanf("%d",&ele);
-					Binsert(ele);
-					break;
-				}
-			case 2:
-				{
-					printf("\nEnter the element");
-					scanf("%d",&ele);
-					Einsert(ele,head);
-					break;
-				}
-			case 3:
-				{
-					printf("\nEnter the element");
-					scanf("%d",&ele);
-					Minsert(ele);
-					break;
-				}
-			case 4:
-				{
-					printf("\nEnter the LL(1/2)");
-					scanf("%d",&ele);
-					if(ele==1)
-						Display(head);
-					else
-						Display(head2);
-					break;
-				}
-			case 5:
-				{
-					Bdelete();
-					break;
-				}
-			case 6:
-				{
-					Edelete();
-					break;
-				}
-			case 7:
-				{
-					printf("\nEnter the element you wanna delete:");
-					scanf("%d",&ele);
-					Mdelete(ele);
-					break;
-				}
-			/*case 8:
-				{
-					copy();
-					break;
-				}
-			case 9:
-				{
-					printf("\nEnter the LL(1/2)");
-					scanf("%d",&ele);
-					if(ele==1)
-						DeleteLL(head);
-					else
-						DeleteLL(head2);
-					break;
-				}
-			case 10:
-				{
-					reverse(head);
-					break;
-				}
-			case 11:
-				{
-					swaplink(head);	
-				}
-
-			case 12:
-				{
-					exit(0);
-				}*/
-		}
-	}
-	return 0;
+    node *temp = (node *)malloc(TAMANHO_DE(node));
+    temp->info = ele;
+    temp->link = head;
+    head = temp;
 }
 
-void Binsert(int ele)
-{
-//	if (head==NULL)
-//		return;
-	node* p=head;
-	node* temp=(node*)malloc(sizeof(node));
-	temp->info=ele;
-	temp->link=head;
-	head=temp;
+PROCEDIMENTO Einsert(INTEIRO ele, node *temph) {
+    node *temp = (node *)malloc(TAMANHO_DE(node));
+    temp->info = ele;
+    node *p;
+    SE temph == NULL ENTAO
+        head = temp; temp->link = NULL; RETORNE;
+    FIM_SE
+    p = temph;
+    ENQUANTO p->link != NULL FACA
+        p = p->link;
+    FIM_ENQUANTO
+    temp->link = NULL;
+    p->link = temp;
 }
 
-void Einsert(int ele,node* temph)
-{
-	node* temp=(node*)malloc(sizeof(node));
-	temp->info=ele;
-	node* p;
-	p=temph;
-	while(p->link!=NULL)
-		p=p->link;
-	temp->link=NULL;
-	p->link=temp;
+PROCEDIMENTO Minsert(INTEIRO ele) {
+    SE head == NULL ENTAO
+        Binsert(ele);
+        RETORNE;
+    FIM_SE
+    SE head->info > ele ENTAO
+        Binsert(ele);
+        RETORNE;
+    FIM_SE
+    node *p, *q, *temp = (node *)malloc(TAMANHO_DE(node));
+    temp->info = ele;
+    p = head;
+    q = head->link;
+    ENQUANTO q != NULL FACA
+
+        SE q->info >= ele ENTAO
+            p->link = temp;
+            temp->link = q;
+            RETORNE;
+        FIM_SE
+        p = p->link;
+        q = q->link;
+    FIM_ENQUANTO
+    p->link = temp;
+    temp->link = NULL;
 }
 
-void Minsert(int ele)
-{
-	if(head==NULL)
-	{
-		Binsert(ele);
-		return;
-	}
-	if (head->info>ele)
-	{
-		Binsert(ele);
-		return;
-	}	
-	node *p,*q,*temp=(node*)malloc(sizeof(node));
-	temp->info=ele;
-	p=head;
-	q=head->link;
-	while(q!=NULL)											//q->link!=null?????????????????????????????????????????? works??????????????????????????????????
-	{
-		if(q->info>=ele)
-		{
-			p->link=temp;
-			temp->link=q;
-			return;
-		}		
-		p=p->link;
-		q=q->link;
-	}
-	Einsert(ele,head);
+PROCEDIMENTO Display(node *temph) {
+    node *p = temph;
+    ENQUANTO p != NULL FACA
+        ESCREVA_FMT("%d->", p->info);
+        p = p->link;
+    FIM_ENQUANTO
+    ESCREVA_LINHA();
 }
 
-void Display(node* temph)
-{
-	node* p=temph;
-	while(p!=NULL)
-	{
-		printf("%d->",p->info);
-		p=p->link;
-	}
-	printf("\n");
-}				
-				
-void Bdelete()
-{
-	node* p=head;
-	head=head->link;
-	free(p);
+PROCEDIMENTO Bdelete(VAZIO) {
+    SE head == NULL ENTAO
+        RETORNE;
+    FIM_SE
+    node *p = head;
+    head = head->link;
+    free(p);
 }
 
-void Edelete()
-{
-	node *p,*q;
-	p=head;
-	while(p->link->link!=NULL)
-		p=p->link;
-	q=p->link;
-	p->link=NULL;
-	free(q);
+PROCEDIMENTO Edelete(VAZIO) {
+    SE head == NULL OU head->link == NULL ENTAO
+        Bdelete(); RETORNE;
+    FIM_SE
+    node *p, *q;
+    p = head;
+    ENQUANTO p->link->link != NULL FACA
+        p = p->link;
+    FIM_ENQUANTO
+    q = p->link;
+    p->link = NULL;
+    free(q);
 }
 
-void Mdelete(int ele)
-{
-	if (head->info==ele)
-	{
-		Bdelete();
-		return;
-	}
-	node *p=head,*q=head->link;
-	while(q->link!=NULL)										//q->link!=null?????????????????????????????????????????? doesnt work 
-	{
-		if(q->info==ele)
-		{
-			p->link=q->link;
-			free(q);
-			return;
-		}
-	}
+PROCEDIMENTO Mdelete(INTEIRO ele) {
+    SE head == NULL ENTAO
+        RETORNE;
+    FIM_SE
+    SE head->info == ele ENTAO
+        Bdelete();
+        RETORNE;
+    FIM_SE
+    node *p = head, *q = head->link;
+    ENQUANTO q != NULL FACA
+        SE q->info == ele ENTAO
+            p->link = q->link;
+            free(q);
+            RETORNE;
+        FIM_SE
+        p = q;
+        q = q->link;
+    FIM_ENQUANTO
 }
 
-void DeleteLL(node* temph)
-{
-	node *p=temph,*q=temph->link;
-	while(q!=NULL)
-	{
-		free(p);
-		p=q;
-		q=q->link;
-	}
-	free(p);
-	temph=NULL;
+PROCEDIMENTO DeleteLL(node *p) {
+    ENQUANTO p != NULL FACA
+        node *next = p->link;
+        free(p);
+        p = next;
+    FIM_ENQUANTO
 }
 
-void copy()
-{
-	DeleteLL(head2);
-	node *p,*q;
-	p=head;
-	q=head2;
-	while(p!=NULL)
-		Einsert(p->info,head2);
+PROCEDIMENTO copy(VAZIO) {
+    DeleteLL(head2);
+    head2 = NULL;
+    node **tail = &head2;
+    node *p = head;
+    ENQUANTO p != NULL FACA
+        *tail = malloc(TAMANHO_DE(node));
+        AFIRME(*tail != NULL, "Allocation failed");
+        (*tail)->info = p->info;
+        (*tail)->link = NULL;
+        tail = &(*tail)->link;
+        p = p->link;
+    FIM_ENQUANTO
 }
 
-node* locate(node* head, int ind)
-{
-	node *p;
-	int x;
-	p= head->link;
-	x=0;
-	while(x!=ind||p!=NULL)
-	{
-		p=p->link;
-		x++;
-	}
-	return p;
+PROCEDIMENTO reverse(VAZIO) {
+    node *reversed = NULL;
+    ENQUANTO head != NULL FACA
+        node *next = head->link;
+        head->link = reversed;
+        reversed = head;
+        head = next;
+    FIM_ENQUANTO
+    head = reversed;
 }
-/*
-void reverse(node* head)
-{	
-	printf("111111111111111111111111111111111111");
-	node *x = head, *p, *q; 
-	int n=0, temp=0,i;
-	for (i=0;x!=NULL;i++)
-		n++;
-	printf("222222222222222222222222222222222222");
-	for(i=0;i<n/2;i++)
-	{
-		p=locate(head,i);
-		q=locate(head,n/2-i);
-	printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-		temp = p->info;
-		p->info=q->info;
-		q->info = temp;//mind fucked
-	}
-}
-	
-				
-void swaplink(node* head)
-{
-	node *p,*q;
-	q=head;
-	int leng=len(head);
-	int count=leng-1,i,n=0;
-	for(i=0;i<leng-1;i++)
-	{				{
-		while( n<count)
-		{
-			p=q;
-			q=q->link;
-		}
-		q->link=p;
-		n++;
-	}
-}
-
-int len(node* head)
-{
-	node* p=head;
-	int x=1;
-	while (p->link!=NULL)
-	{
-		p=p->link;
-		x++;
-	}
-	return x;
-}
-				
-				
-				
-		*/		
-					
-				
-				
-				
-				

@@ -1,27 +1,28 @@
+#include <basicgol.h>
+
 // Program to input a character and check whether it is vowel or consonant using switch case
-#include <stdio.h>
-int main(){
-    char ch;
-    printf("Enter a character\n");
-    scanf("%c", &ch);
-    switch(ch)
-    {
-    case 'a':
-    case 'e':
-    case 'i':
-    case 'o':
-    case 'u':
-    case 'A':
-    case 'E':
-    case 'I':
-    case 'O':
-    case 'U':
-        printf("Entered character is a vowel");
-        break;
-    default:
-        printf("Entered character is a consonant");
+INICIO
+    CARACTERE ch;
+    ESCREVAL("Enter a character");
+    SE NAO LEIA_OK(ch) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCOLHA(ch)
+    CASO 'a':
+    CASO 'e':
+    CASO 'i':
+    CASO 'o':
+    CASO 'u':
+    CASO 'A':
+    CASO 'E':
+    CASO 'I':
+    CASO 'O':
+    CASO 'U':
+        ESCREVA("Entered character is a vowel");
+        PARE;
+    CONTRARIO:
+        ESCREVA("Entered character is a consonant");
+    FIM_ESCOLHA
 
-    }
-
-    return 0;
-}
+    RETORNE 0;
+FIM

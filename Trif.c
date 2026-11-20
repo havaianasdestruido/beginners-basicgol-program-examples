@@ -1,10 +1,12 @@
-#include<stdio.h>
-#include<math.h>
-void main()
-{ double a,b;
-printf("Enter the degree : ");
-scanf("%lf",&a);
-a=(a*3.14)/180;
-b=sin(a);
-printf("Sine is %lf",b);
-}
+#include <basicgol.h>
+
+INICIO
+    REAL a, b;
+    ESCREVA("Enter the degree : ");
+    SE NAO LEIA_OK(a) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    a = (a * 3.14) / 180;
+    b = sin(a);
+    ESCREVA_FMT("Sine is %lf", b);
+FIM

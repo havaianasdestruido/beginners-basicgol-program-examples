@@ -1,29 +1,29 @@
-#include<stdio.h>
-#include<string.h>
-long long int max=1e6 +5;
-int main()
-{
-	//Defining a string to take input of the number
-	char number[max];
+#include <basicgol.h>
 
-	long long int len,i,count=0;
+INTEIRO64 max = 1000005;
+INICIO
+    // Defining a string to take input of the number
+    TEXTO_FIXO(number, max);
 
-	//Taking the inputin form of a string
-	printf("Enter a Number: ");
-	scanf("%s",number);
+    INTEIRO64 len, i, count = 0;
 
-	//Finding the number of digits by calculating the lenght of the string
-	len=strlen(number);
+    // Taking the inputin form of a string
+    ESCREVA("Enter a Number: ");
+    AFIRME(scanf("%1000004s", number) == 1, "Invalid input");
 
-	//Checking if the number is a palindrome or not
-	for(i=0;i<len/2;i++)
-	{
-		if(number[i]==number[len-i-1])
-				count++;
-	}
-	if(count==len/2)
-		printf("The entered number %s is a palindrome\n",number);
-	else
-		printf("The entered number %s is not a palindrome\n",number);
-	return 0;
-}
+    // Finding the number of digits by calculating the lenght of the string
+    len = TAMANHO_TEXTO(number);
+
+    // Checking if the number is a palindrome or not
+    PARA (i, 0, len / 2 - 1) {
+        SE number[i] == number[len - i - 1] ENTAO
+            count++;
+        FIM_SE
+    }
+    SE count == len / 2 ENTAO
+        ESCREVA_FMT("The entered number %s is a palindrome\n", number);
+    SENAO
+        ESCREVA_FMT("The entered number %s is not a palindrome\n", number);
+    FIM_SE
+    RETORNE 0;
+FIM

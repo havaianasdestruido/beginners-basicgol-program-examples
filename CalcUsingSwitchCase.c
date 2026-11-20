@@ -1,43 +1,46 @@
-// Very tiny and stupid Calculator using switch case
-//Answer will be 0 in case 4 if quotients value is in points.
-//For instance, 5/3 will be shown as 0. This is because we have declared c as integer and not float.
+#include <basicgol.h>
 
-#include <stdio.h>
-  int main() {
-    int a, b, c;
-    char ch;
-    printf("enter two number\n");
-    scanf("%d%d", & a, & b);
-    fflush(stdin);
-    //flush the input buffer. You might use this function if you think that there might be
-    //some data in input buffer which can create problems for you while taking user inputs from stdin.
-    printf("enter your choice\n");
-    printf("1. enter 1 for addition\n");
-    printf("2. enter 2 for subtraction\n");
-    printf("3. enter 3 for multiplication\n");
-    printf("4. Enter 4 for division\n");
-    printf("5. enter 5 for modulo division\n");
-    scanf("%c", & ch);
-    switch (ch) {
-    case '1':
-      c = a + b;
-      break;
-    case '2':
-      c = a - b;
-      break;
-    case '3':
-      c = a * b;
-      break;
-    case '4':
-      c = a / b;
-      break;
-    case '5':
-      c = a % b; //Modulus division only works with integers.
-      break;
-    default:
-      printf("wrong choice");
-    }
-    printf("calculated value=%d", c);
+// Integer calculator: division truncates toward zero.
 
-    return 0;
-  }
+INICIO
+    INTEIRO a, b, c;
+    CARACTERE ch;
+    ESCREVAL("enter two number");
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(b) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+
+    ESCREVAL("enter your choice");
+    ESCREVAL("1. enter 1 for addition");
+    ESCREVAL("2. enter 2 for subtraction");
+    ESCREVAL("3. enter 3 for multiplication");
+    ESCREVAL("4. Enter 4 for division");
+    ESCREVAL("5. enter 5 for modulo division");
+    SE NAO LEIA_OK(ch) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCOLHA(ch)
+    CASO '1':
+        c = a + b;
+        PARE;
+    CASO '2':
+        c = a - b;
+        PARE;
+    CASO '3':
+        c = a * b;
+        PARE;
+    CASO '4':
+        AFIRME(b != 0, "Division by zero");
+        c = a / b;
+        PARE;
+    CASO '5':
+        AFIRME(b != 0, "Division by zero");
+        c = a MOD b; // Modulus division only works with integers.
+        PARE;
+    CONTRARIO:
+        ERRO("wrong choice");
+    FIM_ESCOLHA
+    ESCREVA_FMT("calculated value=%d", c);
+
+    RETORNE 0;
+FIM

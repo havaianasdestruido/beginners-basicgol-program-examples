@@ -1,13 +1,12 @@
+#include <basicgol.h>
+
 // Decrement operator
 
-#include<stdio.h>
-int main()
-{
-    int a= 5, b, c;
+INICIO
+    INTEIRO a = 5, b, c;
     b = a--;
     c = a--;
 
-    printf("Value of b = %d\n Value of c = %d\n", b,c);
-    return 0;
-}
-
+    ESCREVA_FMT("Value of b = %d\n Value of c = %d\n", b, c);
+    RETORNE 0;
+FIM

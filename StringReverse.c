@@ -1,22 +1,18 @@
-#include<stdio.h>
-#include<conio.h>
-void main()
-{
-    int i, j, k;
-    char str[100];
-    char rev[100];
-    printf("Enter a string:\t");
-    scanf("%s", str);
-    printf("The original string is %s\n", str);
-    for(i = 0; str[i] != '\0'; i++);
-    {
-        k = i-1;
-    }
-    for(j = 0; j <= i-1; j++)
-    {
+#include <basicgol.h>
+
+INICIO
+    INTEIRO i, j, k;
+    TEXTO_FIXO(str, 100);
+    TEXTO_FIXO(rev, 100);
+    ESCREVA("Enter a string:\t");
+    AFIRME(scanf("%99s", str) == 1, "Invalid input");
+    ESCREVA_FMT("The original string is %s\n", str);
+    i = TAMANHO_TEXTO(str);
+    k = i - 1;
+    PARA (j, 0, i - 1) {
         rev[j] = str[k];
         k--;
     }
-    printf("The reverse string is %s\n", rev);
-    getch();
-}
+    rev[i] = '\0';
+    ESCREVA_FMT("The reverse string is %s\n", rev);
+FIM

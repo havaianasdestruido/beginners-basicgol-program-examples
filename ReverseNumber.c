@@ -1,22 +1,22 @@
-//program to find reverse of a number
+#include <basicgol.h>
 
-#include <stdio.h>
+// program to find reverse of a number
 
-int main()
-{
-   int n, reverse = 0;
+INICIO
+    INTEIRO n, reverse = 0;
 
-   printf("Enter a number to reverse\n");
-   scanf("%d", &n);
+    ESCREVAL("Enter a number to reverse");
+    SE NAO LEIA_OK(n) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-   while (n != 0)
-   {
-      reverse = reverse * 10;
-      reverse = reverse + n%10;
-      n       = n/10;
-   }
+    ENQUANTO n != 0 FACA
+        reverse = reverse * 10;
+        reverse = reverse + n MOD 10;
+        n = n / 10;
+    FIM_ENQUANTO
 
-   printf("Reverse of entered number is = %d\n", reverse);
+    ESCREVA_FMT("Reverse of entered number is = %d\n", reverse);
 
-   return 0;
-}
+    RETORNE 0;
+FIM

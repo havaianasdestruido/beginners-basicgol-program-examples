@@ -1,8 +1,11 @@
-#include<stdio.h>
-void main()
-{ int a,b,c;
-printf("Enter two Numbers : ");
-scanf("%d %d",&a,&b);
-c=a-b;
-printf("Subtraction is %d",c);
-}
+#include <basicgol.h>
+
+INICIO
+    INTEIRO a, b, c;
+    ESCREVA("Enter two Numbers : ");
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(b) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    c = a - b;
+    ESCREVA_FMT("Subtraction is %d", c);
+FIM

@@ -1,21 +1,23 @@
+#include <basicgol.h>
+
 // Greatest number using nested if
 
-#include<stdio.h>
-
-int main()
-{
-    int a,b,c;
-    printf("enter three integer number\n");
-    scanf("%d%d%d",&a,&b,&c);
-    if(a>b)
-    if(a>c)
-        printf("a is greatest");
-    else
-        printf("c is greatest");
-    else
-    if(b>c)
-        printf("b is greatest");
-    else
-        printf("c is greatest");
-    return 0;
-}
+INICIO
+    INTEIRO a, b, c;
+    ESCREVAL("enter three integer number");
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(b) OU NAO LEIA_OK(c) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    SE a > b ENTAO
+        SE a > c ENTAO
+            ESCREVA("a is greatest");
+        SENAO
+            ESCREVA("c is greatest");
+        FIM_SE
+    SENAO_SE b > c ENTAO
+        ESCREVA("b is greatest");
+    SENAO
+        ESCREVA("c is greatest");
+    FIM_SE
+    RETORNE 0;
+FIM

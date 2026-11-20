@@ -1,11 +1,14 @@
+#include <basicgol.h>
+
 // Program to check for leap year using ternary operator
-#include<stdio.h>
-int main()
-{
-    int y;
-    printf("enter year for checking leap year or not\n");
-    scanf("%d",&y);
-    //Using ternary operator
-    (((y%100!=0)&&(y%4==0))||(y%400==0))?printf("%d is leap year",y):printf("%d is not a leap year",y);
-    return 0;
-}
+INICIO
+    INTEIRO y;
+    ESCREVAL("enter year for checking leap year or not");
+    SE NAO LEIA_OK(y) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    // Using ternary operator
+    (((y MOD 100 != 0) E (y MOD 4 == 0)) OU (y MOD 400 == 0)) ? ESCREVA_FMT("%d is leap year", y)
+                                                         : ESCREVA_FMT("%d is not a leap year", y);
+    RETORNE 0;
+FIM

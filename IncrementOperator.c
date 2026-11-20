@@ -1,13 +1,12 @@
+#include <basicgol.h>
+
 // Increment operator
 
-#include<stdio.h>
-int main()
-{
-    int a= 5, b, c;
-    b = a++ + ++a;  //Right to left
-    c = ++a + a++;  //Right to left
+INICIO
+    INTEIRO a = 5, b, c;
+    b = a++; // Capture the old value, then increment.
+    c = ++a; // Increment first, then capture the new value.
 
-    printf("Value of b = %d\n Value of c = %d\n", b,c);
-    return 0;
-}
-
+    ESCREVA_FMT("Value of b = %d\n Value of c = %d\n", b, c);
+    RETORNE 0;
+FIM

@@ -1,3 +1,5 @@
+#include <basicgol.h>
+
 // Program to find the daily wages of a worker according to the following
 // conditions using ladder else if statement
 // Given below is the Pay according to hour
@@ -11,22 +13,23 @@
 // Next 4 hours	            80 Rupees/hour
 //-----------------------------------------------------------------------
 
-#include<stdio.h>
-int main(){
-    int hour, amount;
-    printf("Enter number of duty hours\n");
-    scanf("%d", &hour);
-    if (hour >= 1 && hour <= 8)
+INICIO
+    INTEIRO hour, amount;
+    ESCREVAL("Enter number of duty hours");
+    SE NAO LEIA_OK(hour) OU hour < 1 OU hour > 24 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    SE hour >= 1 E hour <= 8 ENTAO
         amount = 100;
-    else if (hour >= 9 && hour <= 12)
-        amount = 100 + (hour - 8)*20;
-    else if (hour >= 13 && hour <= 16)
-        amount = 180 + (hour - 12)*40;
-    else if (hour >= 17 && hour <= 20)
-        amount = 340 + (hour - 16)*60;
-    else if (hour >= 21 && hour <= 24)
-        amount = 580 + (hour - 20)*80;
-    printf("Amount incurred by worker : %d", amount);
-    return 0;
-
-}
+    SENAO_SE hour >= 9 E hour <= 12 ENTAO
+        amount = 100 + (hour - 8) * 20;
+    SENAO_SE hour >= 13 E hour <= 16 ENTAO
+        amount = 180 + (hour - 12) * 40;
+    SENAO_SE hour >= 17 E hour <= 20 ENTAO
+        amount = 340 + (hour - 16) * 60;
+    SENAO
+        amount = 580 + (hour - 20) * 80;
+    FIM_SE
+    ESCREVA_FMT("Amount incurred by worker : %d", amount);
+    RETORNE 0;
+FIM

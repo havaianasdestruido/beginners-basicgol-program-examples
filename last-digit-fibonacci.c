@@ -1,43 +1,50 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include <basicgol.h>
 
-int last_digit_fib_optimized(const int index)
-{
-	int first = 0; 
-	int second = 1;
-	int current = 0;
+FUNCAO INTEIRO last_digit_fib_optimized(const INTEIRO index) {
+    SE index < 2 ENTAO
+        RETORNE index;
+    FIM_SE
+    INTEIRO first = 0;
+    INTEIRO second = 1;
+    INTEIRO current = 0;
 
-	for (int i = 2; i <= index; ++i) {
-		current = (first + second) % 10;
-		first = second;
-		second = current;
-	}
+    INTEIRO i;
+    PARA (i, 2, index) {
+        current = (first + second) MOD 10;
+        first = second;
+        second = current;
+    }
 
-	return (current);
+    RETORNE (current);
 }
 
 /* This is the direct solution for reference */
-int last_digit_fib_naive(const int index)
-{
-	int *arr;
-	arr = (int *)malloc((index+1) * sizeof(int));
-	arr[0] = 0;
-	arr[1] = 1;
+FUNCAO INTEIRO last_digit_fib_naive(const INTEIRO index) {
+    SE index < 2 ENTAO
+        RETORNE index;
+    FIM_SE
+    INTEIRO *arr;
+    arr = (INTEIRO *)malloc((index + 1) * TAMANHO_DE(INTEIRO));
+    arr[0] = 0;
+    arr[1] = 1;
 
-	for (int i = 2; i <= index; ++i) { // store only the last digit of each index
-		arr[i] = (arr[i - 1] + arr[i - 2]) % 10;
-	}
+    INTEIRO i;
+    PARA (i, 2, index) { // store only the last digit of each index
+        arr[i] = (arr[i - 1] + arr[i - 2]) MOD 10;
+    }
 
-	int res = arr[index];
-	return (res);
+    INTEIRO res = arr[index];
+    free(arr);
+    RETORNE res;
 }
 
-int main(int argc, char **argv)
-{
-	int index = 0;
-	scanf("%d", &index);
+INICIO
+    INTEIRO index = 0;
+    SE NAO LEIA_OK(index) OU index < 0 ENTAO
+        ERRO("Invalid input");
+    FIM_SE
 
-	printf("%d\n", last_digit_fib_optimized(index));
-	
-	return 0;
-}
+    ESCREVA_FMT("%d\n", last_digit_fib_optimized(index));
+
+    RETORNE 0;
+FIM

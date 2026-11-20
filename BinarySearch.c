@@ -1,46 +1,34 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-/* If x in into array return 0, else 1 */
-/* 
- * A function with 4 params:
- * int[] = array of elements
- * int = wanted number
- * int = start index
- * int = end index
- *
- * returns 0 or 1
- */
-int binarySearch(int[], int, int, int);
+// Return 0 if the array contains the number, 1 otherwise.
+FUNCAO INTEIRO binarySearch(INTEIRO[], INTEIRO, INTEIRO, INTEIRO);
 
-int main() {
-	int arr[] = {5, 15, 24, 32, 56, 89};
+INICIO
+    INTEIRO arr[] = {5, 15, 24, 32, 56, 89};
     /* check length of array */
-	int size_of_array = sizeof(arr) / sizeof(int);
-	/* Check if 24 is into arr */
-	printf("%d\n", binarySearch(arr, 24, 0, size_of_array-1));
-	/* Check if 118 is into arr */
-	printf("%d\n", binarySearch(arr, 118, 0, size_of_array-1));
-	return 0;
-}
+    INTEIRO size_of_array = TAMANHO_VETOR(arr);
+    /* Check if 24 is into arr */
+    ESCREVA_FMT("%d\n", binarySearch(arr, 24, 0, size_of_array - 1));
+    /* Check if 118 is into arr */
+    ESCREVA_FMT("%d\n", binarySearch(arr, 118, 0, size_of_array - 1));
+    RETORNE 0;
+FIM
 
-int binarySearch(int array[], int number, int start, int end) {
+FUNCAO INTEIRO binarySearch(INTEIRO array[], INTEIRO number, INTEIRO start, INTEIRO end) {
     /* if start index is get end index, check if that element is equals wanter nmber */
-	if(start >= end) {
-		return array[start] == number ? 0 : 1;
-	}
+    SE start > end ENTAO
+        RETORNE 1;
+    FIM_SE
+    SE start == end ENTAO
+        RETORNE array[start] == number ? 0 : 1;
+    FIM_SE
 
-	int tmp = (int) end / 2;
-    /* divide array length in half */
-    /* if number is greater than element in half, do search by start to tmp
-	 * else search by tmp to end
-     */
-	if(number == array[tmp]) {
-		return 0;
-	} else if(number > array[tmp]) {
-		return binarySearch(array, number, start, tmp);
-	} else {
-		return binarySearch(array, number, tmp, end);
-	}
+    INTEIRO tmp = start + (end - start) / 2;
+    SE number == array[tmp] ENTAO
+        RETORNE 0;
+    SENAO_SE number < array[tmp] ENTAO
+        RETORNE binarySearch(array, number, start, tmp - 1);
+    SENAO
+        RETORNE binarySearch(array, number, tmp + 1, end);
+    FIM_SE
 }
-
-

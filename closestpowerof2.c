@@ -1,25 +1,22 @@
-//Program for printing closest of 2 of a number.
+#include <basicgol.h>
 
-#include<stdio.h>
-#include<math.h>
+// Program for printing closest of 2 of a number.
 
-int main()
-{
-    int num,a,b,c,d=0;
-    scanf("%d",&num);
-    for(b=31;b>=0;--b)
-    {
-        c=num>>b;
-        if(c&1)
-        {
+INICIO
+    INTEIRO num, b, c, d = 0;
+    SE NAO LEIA_OK(num) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    PARA_PASSO (b, 31, 0, -1) {
+        c = num >> b;
+        SE c & 1 ENTAO
             d++;
-            if(d>1)
-            {
-                num=num-pow(2,b);
-            }
-        }
+            SE d > 1 ENTAO
+                num = num - POTENCIA(2, b);
+            FIM_SE
+        FIM_SE
     }
-    printf("%d",num);
-    return 0;
-}
-//not working for negative no.
+    ESCREVA_FMT("%d", num);
+    RETORNE 0;
+FIM
+// not working for negative no.

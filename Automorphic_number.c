@@ -1,24 +1,26 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-int main() {
-  int num, sqr, temp, last;
-  int n = 0;
-  printf("Enter a number \n");
-  scanf("%d", & num);
-  sqr = num * num; //calculating square of num
-  temp = num;
-  //Counting number of digits
-  while (temp > 0) {
-    n++;
-    temp = temp / 10;
-  }
-  //Extracting last n digits
-  int den = floor(pow(10, n));
-  last = sqr % den;
-  if (last == num)
-    printf("Automorphic number \n");
-  else
-    printf("Not Automorphic \n");
-  return 0;
-}
+#include <basicgol.h>
+
+INICIO
+    INTEIRO num, sqr, temp, last;
+    INTEIRO n = 0;
+    ESCREVAL("Enter a number ");
+    SE NAO LEIA_OK(num) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    sqr = num * num; // calculating square of num
+    temp = num;
+    // Counting number of digits
+    ENQUANTO temp > 0 FACA
+        n++;
+        temp = temp / 10;
+    FIM_ENQUANTO
+    // Extracting last n digits
+    INTEIRO den = PISO(POTENCIA(10, n));
+    last = sqr MOD den;
+    SE last == num ENTAO
+        ESCREVAL("Automorphic number ");
+    SENAO
+        ESCREVAL("Not Automorphic ");
+    FIM_SE
+    RETORNE 0;
+FIM

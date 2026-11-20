@@ -1,14 +1,14 @@
+#include <basicgol.h>
+
 // Uppercase character to lowercase character
 
-
-#include<stdio.h>
-int main()
-{
-    char a,u;
-    printf("Enter Uppercase letter :\n");
-    scanf("%c", &a);
+INICIO
+    CARACTERE a, u;
+    ESCREVAL("Enter Uppercase letter :");
+    SE NAO LEIA_OK(a) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
     u = a + 32;
-    printf("Lowercase is : %c", u);
-    return 0;
-
-}
+    ESCREVA_FMT("Lowercase is : %c", u);
+    RETORNE 0;
+FIM

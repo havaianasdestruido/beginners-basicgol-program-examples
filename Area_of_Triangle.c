@@ -1,10 +1,15 @@
-#include<stdio.h>
-void main()
-{ float a,b,h;
-printf("Enter the base : ");
-scanf("%f",&b);
-printf("Enter the height : ");
-scanf("%f",&h);
-a=0.5*b*h;
-printf("Area is %f",a);
-}
+#include <basicgol.h>
+
+INICIO
+    REAL_CURTO a, b, h;
+    ESCREVA("Enter the base : ");
+    SE NAO LEIA_OK(b) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    ESCREVA("Enter the height : ");
+    SE NAO LEIA_OK(h) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+    a = 0.5 * b * h;
+    ESCREVA_FMT("Area is %f", a);
+FIM

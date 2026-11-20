@@ -1,11 +1,10 @@
+#include <basicgol.h>
+
 // Bitwise complement operator
 
-#include <stdio.h>
-int main()
-{
-    int a=14, b;
+INICIO
+    INTEIRO a = 14, b;
     b = ~a;
-    printf("Value of c = %d\n",b);
-    return 0;
-
-}
+    ESCREVA_FMT("Value of c = %d\n", b);
+    RETORNE 0;
+FIM

@@ -1,8 +1,6 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-int main() {
-   
-   printf("Hello, World!");
-   return 0;
-
-}
+INICIO
+    ESCREVA("Hello, World!");
+    RETORNE 0;
+FIM

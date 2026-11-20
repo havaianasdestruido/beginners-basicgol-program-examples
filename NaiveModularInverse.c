@@ -1,23 +1,28 @@
-#include <stdio.h>
+#include <basicgol.h>
 
-int naiveModInv(int x, int y)
-{
-	// If there is an immediate value reduction
-	x %= y; 
+FUNCAO INTEIRO naiveModInv(INTEIRO x, INTEIRO y) {
+    // If there is an immediate value reduction
+    AFIRME(y > 1, "Modulus must exceed one");
+    x %= y;
 
-	for(int i = 1; i < y; i++)
-		if((x * i) % y == 1)
-			return i;
+    INTEIRO i;
+    PARA (i, 1, y - 1) {
+        SE (x * i) MOD y == 1 ENTAO
+            RETORNE i;
+        FIM_SE
+    }
+    RETORNE -1; // No inverse.
 }
 
-int main()
-{
-	printf("Enter a and m: ");
-	int a, m;
-	scanf("%d%d", &a, &m);
-	
-	int ans = naiveModInv(a, m);
-	printf("%d\n", ans);	
-	
-	return 0;
-}
+INICIO
+    ESCREVA("Enter a and m: ");
+    INTEIRO a, m;
+    SE NAO LEIA_OK(a) OU NAO LEIA_OK(m) ENTAO
+        ERRO("Invalid input");
+    FIM_SE
+
+    INTEIRO ans = naiveModInv(a, m);
+    ESCREVA_FMT("%d\n", ans);
+
+    RETORNE 0;
+FIM
